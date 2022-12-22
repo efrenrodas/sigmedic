@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('pacientes', function (Blueprint $table) {
+        Schema::create('medicosespecialidades', function (Blueprint $table) {
             $table->id();
-            $table->integer('tipo_registro');
-            $table->string('edad');
-            $table->string('seguroMedico');
-            $table->string('nombreContactoEm')->nullable();
-            $table->string('numContactoEm')->nullable();
-            $table->foreignId('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('id_medido')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('id_especialidad')->references('id')->on('especialidades');
+            $table->boolean('estado')->default(true);
+            $table->decimal('precio')->nullable()->default('0.00');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pacientes');
+        Schema::dropIfExists('medicosespecialidades');
     }
 };

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
@@ -29,13 +30,20 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::resource('pacientes',PacienteController::class);
+
 
 Route::resource('roles',RoleController::class);
 
 Route::resource('permissions',PermissionController::class);
 
+route::get('dameUsuarios',[UserController::class,'damePacientes'])->name('dame.pacientes');
+
+route::get('dameMedicos',[UserController::class,'dameMedicos'])->name('dame.medicos');
+
 Route::resource('medicos',MedicoController::class);
 
 Route::resource('users',UserController::class);
 
+Route::get('rolespermisos',[RoleController::class,'rolPermiso'])->name('rol.permiso');
+
+Route::resource('especialidades', EspecialidadeController::class);

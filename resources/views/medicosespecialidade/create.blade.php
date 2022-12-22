@@ -1,11 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Crear permiso</h1>
-@stop
-
+@section('template_title')
+    Create Medicosespecialidade
+@endsection
 
 @section('content')
     <section class="content container-fluid">
@@ -16,13 +13,13 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear permiso</span>
+                        <span class="card-title">Create Medicosespecialidade</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('permissions.store') }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('medicosespecialidades.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('permission.form')
+                            @include('medicosespecialidade.form')
 
                         </form>
                     </div>
@@ -30,13 +27,4 @@
             </div>
         </div>
     </section>
-    @stop
-
-    @section('css')
-
-    @stop
-
-    @section('js')
-
-    @stop
-
+@endsection

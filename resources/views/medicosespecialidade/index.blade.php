@@ -1,10 +1,8 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Dashboard')
-
-@section('content_header')
-    <h1>Gestión de permisos</h1>
-@stop
+@section('template_title')
+    Medicosespecialidade
+@endsection
 
 @section('content')
     <div class="container-fluid">
@@ -15,12 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Permisos') }}
+                                {{ __('Medicosespecialidade') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('permissions.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo') }}
+                                <a href="{{ route('medicosespecialidades.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
                                 </a>
                               </div>
                         </div>
@@ -37,26 +35,32 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
+                                        
+										<th>Id Medido</th>
+										<th>Id Especialidad</th>
+										<th>Estado</th>
+										<th>Precio</th>
 
-										<th>Nombre</th>
-
-                                        <th>Acciones</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($permissions as $permission)
+                                    @foreach ($medicosespecialidades as $medicosespecialidade)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-
-											<td>{{ $permission->name }}</td>
+                                            
+											<td>{{ $medicosespecialidade->id_medido }}</td>
+											<td>{{ $medicosespecialidade->id_especialidad }}</td>
+											<td>{{ $medicosespecialidade->estado }}</td>
+											<td>{{ $medicosespecialidade->precio }}</td>
 
                                             <td>
-                                                <form action="{{ route('permissions.destroy',$permission->id) }}" method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('permissions.show',$permission->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
-                                                    <a class="btn btn-sm btn-success" href="{{ route('permissions.edit',$permission->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('medicosespecialidades.destroy',$medicosespecialidade->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('medicosespecialidades.show',$medicosespecialidade->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('medicosespecialidades.edit',$medicosespecialidade->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -66,17 +70,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $permissions->links() !!}
+                {!! $medicosespecialidades->links() !!}
             </div>
         </div>
     </div>
-    @stop
-
-    @section('css')
-
-    @stop
-
-    @section('js')
-
-    @stop
-
+@endsection

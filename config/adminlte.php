@@ -290,7 +290,7 @@ return [
     | https://github.com/jeroennoten/Laravel-AdminLTE/wiki/Menu-Configuration
     |
     */
-   
+
 
     'menu' => [
         // Navbar items:
@@ -320,53 +320,36 @@ return [
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
+            'can'=>'agendar',
         ],
         ['header' => 'Gestión de '],
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
+            'text' => 'Pacientes',
+            'route'  => 'dame.pacientes',
             'icon' => 'fas fa-fw fa-user',
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Medicos',
+            'route'  => 'dame.medicos',
+            'icon' => 'fas fa-fw fa-user-md',
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Especialidades',
+            'route'  => 'especialidades.index',
+            'icon' => 'fas fa-fw fa-check-square',
+        ],
+        [
+            'text'    => 'Configuración',
+            'icon'    => 'fas fa-fw fa-lock',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Roles',
+                    'route'  => 'roles.index',
                 ],
+
                 [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                    'text' => 'Premisos',
+                    'route'  => 'permissions.index',
                 ],
             ],
         ],
@@ -374,12 +357,12 @@ return [
         [
             'text'       => 'roles',
             'icon_color' => 'red',
-            'route'        => 'roles.index',
+          //  'route'        => 'roles.index',
         ],
         [
             'text'       => 'permisos',
             'icon_color' => 'yellow',
-            'route'        => 'permissions.index',
+          //  'route'        => 'permissions.index',
         ],
         [
             'text'       => 'information',

@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    User
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Usuarios</h1>
+@stop
 
 @section('content')
     <div class="container-fluid">
@@ -18,7 +20,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('users.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                  {{ __('Crear nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -35,7 +37,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Name</th>
 										<th>Apellidos</th>
 										<th>Email</th>
@@ -51,7 +53,7 @@
                                     @foreach ($users as $user)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->apellidos }}</td>
 											<td>{{ $user->email }}</td>
@@ -80,4 +82,12 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop

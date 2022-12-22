@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $user->name ?? 'Show User' }}
-@endsection
+@section('title', 'Dashboard')
 
+@section('content_header')
+    <h1>Ver </h1>
+@stop
 @section('content')
     <section class="content container-fluid">
         <div class="row">
@@ -11,17 +12,17 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver Usuarui</span>
+                            <span class="card-title">Ver usuario</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('users.index') }}"> Regresar</a>
+                            <a class="btn btn-primary" href="{{ url()->previous() }}"> Regresar</a>
                         </div>
                     </div>
 
                     <div class="card-body">
-                        
+
                         <div class="form-group">
-                            <strong>Name:</strong>
+                            <strong>Nombres:</strong>
                             {{ $user->name }}
                         </div>
                         <div class="form-group">
@@ -37,7 +38,7 @@
                             {{ $user->identificacion }}
                         </div>
                         <div class="form-group">
-                            <strong>Fechanaciemiento:</strong>
+                            <strong>Fecha de naciemiento:</strong>
                             {{ $user->fechaNaciemiento }}
                         </div>
                         <div class="form-group">
@@ -45,7 +46,7 @@
                             {{ $user->genero }}
                         </div>
                         <div class="form-group">
-                            <strong>Ciudadresidencia:</strong>
+                            <strong>Ciudad de residencia:</strong>
                             {{ $user->ciudadResidencia }}
                         </div>
 
@@ -54,4 +55,13 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop
+

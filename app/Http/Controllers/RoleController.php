@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 #use App\Models\Role;
+
+#use App\Models\Permission;
+use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Illuminate\Http\Request;
 
@@ -49,7 +52,7 @@ class RoleController extends Controller
         $role = Role::create($request->all());
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role created successfully.');
+            ->with('success', 'Rol creado correctamente.');
     }
 
     /**
@@ -61,8 +64,8 @@ class RoleController extends Controller
     public function show($id)
     {
         $role = Role::find($id);
-
-        return view('role.show', compact('role'));
+        $permisos = Permission::all();
+        return view('role.show', compact('role','permisos'));
     }
 
     /**
@@ -92,7 +95,7 @@ class RoleController extends Controller
         $role->update($request->all());
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role updated successfully');
+            ->with('success', 'Rol actualizado correctamente');
     }
 
     /**
@@ -105,6 +108,28 @@ class RoleController extends Controller
         $role = Role::find($id)->delete();
 
         return redirect()->route('roles.index')
-            ->with('success', 'Role deleted successfully');
+            ->with('success', 'Rol borrado correctamente');
+    }
+    public function rolPermiso(Request $request)
+    {
+        $data=[];
+        $idRol=$request['idrol'];
+        $rol=Role::find($idRol);
+        $idPermiso=$request['idpermiso'];
+        $valor=$request['valor'];
+
+        $permiso=Permission::find($idPermiso);
+        $data['permiso']=$permiso;
+        if ($valor=="true") {
+            $data['res']='asignado';
+            $rol->givePermissionTo($permiso);
+        }
+        else{
+            $data['res']='retirado';
+            $rol->revokePermissionTo($permiso);
+        }
+        $data['rol']=$rol;
+        return  response()->json($data, 200);
+
     }
 }

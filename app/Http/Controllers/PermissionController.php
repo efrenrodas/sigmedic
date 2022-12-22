@@ -50,7 +50,7 @@ class PermissionController extends Controller
         $permission = Permission::create($request->all());
 
         return redirect()->route('permissions.index')
-            ->with('success', 'Permission created successfully.');
+            ->with('success', 'Permiso creado correctamente.');
     }
 
     /**
@@ -93,7 +93,7 @@ class PermissionController extends Controller
         $permission->update($request->all());
 
         return redirect()->route('permissions.index')
-            ->with('success', 'Permission updated successfully');
+            ->with('success', 'Permiso actualizado correctamente');
     }
 
     /**
@@ -106,6 +106,6 @@ class PermissionController extends Controller
         $permission = Permission::find($id)->delete();
 
         return redirect()->route('permissions.index')
-            ->with('success', 'Permission deleted successfully');
+            ->with('success', 'Permiso borrado con exito');
     }
 }

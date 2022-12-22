@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Update Permission
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Actualizar permiso</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -13,7 +15,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Update Permission</span>
+                        <span class="card-title">Actualizar Permiso</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('permissions.update', $permission->id) }}"  role="form" enctype="multipart/form-data">
@@ -28,4 +30,13 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop
+

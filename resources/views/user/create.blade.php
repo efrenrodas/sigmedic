@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Create User
-@endsection
+@section('title', 'Dashboard')
 
+@section('content_header')
+    <h1>Registrar</h1>
+@stop
 @section('content')
     <section class="content container-fluid">
         <div class="row">
@@ -13,7 +14,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Crear usuario</span>
+                        <span class="card-title">Crear</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('users.store') }}"  role="form" enctype="multipart/form-data">
@@ -27,4 +28,13 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop
+

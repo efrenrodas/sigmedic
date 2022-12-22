@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Paciente
-@endsection
+@section('title', 'Dashboard')
 
+@section('content_header')
+    <h1>Usuarios</h1>
+@stop
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -13,12 +14,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Paciente') }}
+                                {{ $rol }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('pacientes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo') }}
+                                <a href="{{ route('users.create',['tipo'=>$rol]) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Registrar nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -35,36 +36,38 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Tipo Registro</th>
-										<th>Edad</th>
-										<th>Seguro Medico</th>
-										<th>Contacto Emergencia</th>
-										<th>Numero contacto</th>
-										<th>Nombre</th>
+
+										<th>Nombres</th>
+										<th>Apellidos</th>
+										<th>Email</th>
+										<th>Identificacion</th>
+										<th>Fechan de nacimiento</th>
+										<th>Genero</th>
+										<th>Ciudad de residencia</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($pacientes as $paciente)
+                                    @foreach ($users as $user)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
-											<td>{{ $paciente->tipo_registro }}</td>
-											<td>{{ $paciente->edad }}</td>
-											<td>{{ $paciente->seguroMedico }}</td>
-											<td>{{ $paciente->nombreContactoEm }}</td>
-											<td>{{ $paciente->numContactoEm }}</td>
-											<td>{{ $paciente->user->name }}</td>
+
+											<td>{{ $user->name }}</td>
+											<td>{{ $user->apellidos }}</td>
+											<td>{{ $user->email }}</td>
+											<td>{{ $user->identificacion }}</td>
+											<td>{{ $user->fechaNaciemiento }}</td>
+											<td>{{ $user->genero }}</td>
+											<td>{{ $user->ciudadResidencia }}</td>
 
                                             <td>
-                                                <form action="{{ route('pacientes.destroy',$paciente->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('pacientes.show',$paciente->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('pacientes.edit',$paciente->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
+                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> Editar</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Eliminar</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Borrar</button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -74,8 +77,17 @@
                         </div>
                     </div>
                 </div>
-                {!! $pacientes->links() !!}
+                {!! $users->links() !!}
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop
+

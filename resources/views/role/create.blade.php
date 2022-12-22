@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Crear Rol
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Crear Rol</h1>
+@stop
 
 @section('content')
     <section class="content container-fluid">
@@ -27,4 +29,14 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop
+
+

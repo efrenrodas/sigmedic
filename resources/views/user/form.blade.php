@@ -1,6 +1,6 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
             {{ Form::label('name') }}
             {{ Form::text('name', $user->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
@@ -49,7 +49,8 @@
                 @enderror
             </div>
         </div>
-    <div class="form-group">
+        <input type="hidden" name="rol" value="{{$rol}}">
+    {{-- <div class="form-group">
         <label for="rol" class="form-group">{{ __('Rol') }}</label>
 
         <select class="form-select" name="rol" id="">
@@ -57,7 +58,7 @@
                 <option value="{{$rol->name}}">{{$rol->name}}</option>
             @endforeach
         </select>
-    </div>
+    </div> --}}
 &nbsp;
     </div>
     <div class="box-footer mt20">

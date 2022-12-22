@@ -1,8 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    Roles
-@endsection
+@section('title', 'Dashboard')
+
+@section('content_header')
+    <h1>Gestión de roles</h1>
+@stop
 
 @section('content')
     <div class="container-fluid">
@@ -35,20 +37,18 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
-										<th>Name</th>
-										<th>Guard Name</th>
 
-                                        <th></th>
+										<th>Nombre</th>
+
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($roles as $role)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $role->name }}</td>
-											<td>{{ $role->guard_name }}</td>
 
                                             <td>
                                                 <form action="{{ route('roles.destroy',$role->id) }}" method="POST">
@@ -70,4 +70,12 @@
             </div>
         </div>
     </div>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop

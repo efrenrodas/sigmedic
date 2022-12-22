@@ -30,12 +30,14 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+       // return response()->json($request);
+        $rol=$request['tipo'];
         $user = new User();
         $roles=Role::all();
      #   return response()->json($roles);
-        return view('user.create', compact('user','roles'));
+        return view('user.create', compact('user','roles','rol'));
     }
 
     /**
@@ -109,5 +111,26 @@ class UserController extends Controller
 
         return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
+    }
+    public function damePacientes($rol='paciente')
+    { //  $tipo='pacientes';
+     //   $tipoUser==''?$tipo='paciente':$tipo=$tipoUser;
+       # $tipo=$request['tipo'];
+        $users= User::whereHas("roles", function($q) use ($rol){ $q->where("name", $rol); })->paginate();
+
+        //return json_encode($users);
+        return view('user.pacientes',compact('users','rol'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        # code...
+    }
+
+    public function dameMedicos($rol='medico')
+    { //  $tipo='pacientes';
+     //   $tipoUser==''?$tipo='paciente':$tipo=$tipoUser;
+       # $tipo=$request['tipo'];
+        $users= User::whereHas("roles", function($q) use ($rol){ $q->where("name", $rol); })->paginate();
+
+        //return json_encode($users);
+        return view('user.pacientes',compact('users','rol'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        # code...
     }
 }
