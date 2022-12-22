@@ -49,10 +49,16 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+      //  return response()->json($data);
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'apellidos' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'fechaNaciemiento' => ['required', 'date', 'max:255'],
+            'genero' => ['required', 'string', 'max:255'],
+            'ciudadResidencia' => ['required', 'string', 'max:255'],
+            'identificacion' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -64,10 +70,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+       
+        $user= User::create([
             'name' => $data['name'],
+            'apellidos'=>$data['apellidos'],
+            'identificacion'=>$data['identificacion'],
+            'fechaNaciemiento'=>$data['fechaNaciemiento'],
+            'genero'=>$data['genero'],
+            'ciudadResidencia'=>$data['ciudadResidencia'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $user->assignRole('paciente');
+        return $user;
     }
 }
