@@ -316,7 +316,7 @@ return [
         // ],
         [
             'text'        => 'Citas',
-            'route'         => 'medicos.index',
+            'url'         => '#',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
@@ -327,20 +327,24 @@ return [
             'text' => 'Pacientes',
             'route'  => 'dame.pacientes',
             'icon' => 'fas fa-fw fa-user',
+            'can'=>'registrar',
         ],
         [
             'text' => 'Medicos',
             'route'  => 'dame.medicos',
             'icon' => 'fas fa-fw fa-user-md',
+            'can'=>'registrar',
         ],
         [
             'text' => 'Especialidades',
             'route'  => 'especialidades.index',
             'icon' => 'fas fa-fw fa-check-square',
+            'can'=>'registrar',
         ],
         [
             'text'    => 'Configuración',
             'icon'    => 'fas fa-fw fa-lock',
+            'can'=>'gestionar',
             'submenu' => [
                 [
                     'text' => 'Roles',

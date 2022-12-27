@@ -43,12 +43,13 @@ class MedicosespecialidadeController extends Controller
      */
     public function store(Request $request)
     {
+       // return response()->json($request);
         request()->validate(Medicosespecialidade::$rules);
 
         $medicosespecialidade = Medicosespecialidade::create($request->all());
-
-        return redirect()->route('medicosespecialidades.index')
-            ->with('success', 'Medicosespecialidade created successfully.');
+        return redirect()->back();
+     #   return redirect()->route('medicosespecialidades.index')
+    #        ->with('success', 'Medicosespecialidade created successfully.');
     }
 
     /**
@@ -102,8 +103,9 @@ class MedicosespecialidadeController extends Controller
     public function destroy($id)
     {
         $medicosespecialidade = Medicosespecialidade::find($id)->delete();
+        return redirect()->back();
 
-        return redirect()->route('medicosespecialidades.index')
-            ->with('success', 'Medicosespecialidade deleted successfully');
+        // return redirect()->route('medicosespecialidades.index')
+        //     ->with('success', 'Medicosespecialidade deleted successfully');
     }
 }

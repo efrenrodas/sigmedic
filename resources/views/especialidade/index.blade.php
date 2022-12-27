@@ -50,7 +50,7 @@
                                             <td>{{ ++$i }}</td>
 
 											<td>{{ $especialidade->nombre }}</td>
-											<td>{{ $especialidade->estado }}</td>
+											<td>{{ $especialidade->estado=='1'?'Activo':'Inactivo' }}</td>
 
                                             <td>
                                                 <form action="{{ route('especialidades.destroy',$especialidade->id) }}" method="POST">
