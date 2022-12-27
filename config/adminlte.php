@@ -344,7 +344,7 @@ return [
         [
             'text'    => 'Configuración',
             'icon'    => 'fas fa-fw fa-lock',
-            'can'=>'gestionar',
+            'can'=>'desarrollar',
             'submenu' => [
                 [
                     'text' => 'Roles',

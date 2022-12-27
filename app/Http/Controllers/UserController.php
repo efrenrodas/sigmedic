@@ -64,7 +64,7 @@ class UserController extends Controller
            ## $this->damePacientes();
            return redirect()->route('dame.pacientes');
             break;
-        
+
         default:
             # code...
             break;
@@ -97,8 +97,8 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-
-        return view('user.edit', compact('user'));
+        $rol='';
+        return view('user.edit', compact('user','rol'));
     }
 
     /**
@@ -155,8 +155,8 @@ class UserController extends Controller
     {
         # code...
         $user=User::find($id);
-      
-       
+
+
        // return response()->json($especialidades);
         return view('user.show', compact('user'));
 
