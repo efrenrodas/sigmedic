@@ -2,7 +2,7 @@
     <div class="box-body">
 
         <div class="form-group">
-            {{ Form::label('name') }}
+            {{ Form::label('Nombres') }}
             {{ Form::text('name', $user->name, ['class' => 'form-control' . ($errors->has('name') ? ' is-invalid' : ''), 'placeholder' => 'Name']) }}
             {!! $errors->first('name', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -22,7 +22,7 @@
             {!! $errors->first('identificacion', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('fechaNaciemiento') }}
+            {{ Form::label('Fecha de Naciemiento') }}
             {{ Form::date('fechaNaciemiento', $user->fechaNaciemiento, ['class' => 'form-control' . ($errors->has('fechaNaciemiento') ? ' is-invalid' : ''), 'placeholder' => 'Fechanaciemiento']) }}
             {!! $errors->first('fechaNaciemiento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
@@ -32,7 +32,7 @@
             {!! $errors->first('genero', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('ciudadResidencia') }}
+            {{ Form::label('ciudad de Residencia') }}
             {{ Form::text('ciudadResidencia', $user->ciudadResidencia, ['class' => 'form-control' . ($errors->has('ciudadResidencia') ? ' is-invalid' : ''), 'placeholder' => 'Ciudadresidencia']) }}
             {!! $errors->first('ciudadResidencia', '<div class="invalid-feedback">:message</div>') !!}
         </div>

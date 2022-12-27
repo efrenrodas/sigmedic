@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Especialidade;
+use App\Models\Medicosespecialidade;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,8 +55,22 @@ class UserController extends Controller
      $rol=$request['rol'];
         $user = User::create($request->all());
         $user->assignRole($rol);
-        return redirect()->route('users.index')
-            ->with('success', 'User created successfully.');
+       switch ($rol) {
+        case 'medico':
+           ## $this->dameMedicos();
+           return redirect()->route('dame.medicos');
+            break;
+        case 'paciente':
+           ## $this->damePacientes();
+           return redirect()->route('dame.pacientes');
+            break;
+        
+        default:
+            # code...
+            break;
+       }
+        // return redirect()->route('users.index')
+        //     ->with('success', 'User created successfully.');
     }
 
     /**
@@ -66,8 +82,10 @@ class UserController extends Controller
     public function show($id)
     {
         $user = User::find($id);
-
-        return view('user.show', compact('user'));
+        $medicoespe=Medicosespecialidade::where('id_medido','=',$id)->get();
+        $especialidades=Especialidade::where('estado','=',1)->get();
+       // return response()->json($especialidades);
+        return view('user.ver', compact('user','medicoespe','especialidades'));
     }
 
     /**
@@ -119,7 +137,7 @@ class UserController extends Controller
         $users= User::whereHas("roles", function($q) use ($rol){ $q->where("name", $rol); })->paginate();
 
         //return json_encode($users);
-        return view('user.pacientes',compact('users','rol'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
+        return view('user.index',compact('users','rol'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
         # code...
     }
 
@@ -132,5 +150,15 @@ class UserController extends Controller
         //return json_encode($users);
         return view('user.pacientes',compact('users','rol'))->with('i', (request()->input('page', 1) - 1) * $users->perPage());
         # code...
+    }
+    public function verpacientes($id)
+    {
+        # code...
+        $user=User::find($id);
+      
+       
+       // return response()->json($especialidades);
+        return view('user.show', compact('user'));
+
     }
 }

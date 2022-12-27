@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\MedicosespecialidadeController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\UserController;
+use App\Models\Medicosespecialidade;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 
@@ -47,3 +49,8 @@ Route::resource('users',UserController::class);
 Route::get('rolespermisos',[RoleController::class,'rolPermiso'])->name('rol.permiso');
 
 Route::resource('especialidades', EspecialidadeController::class);
+
+Route::resource('medicosespecialidades',MedicosespecialidadeController::class);
+
+
+route::get('verpacientes/{id}',[UserController::class,'verpacientes'])->name('ver.pacientes');
