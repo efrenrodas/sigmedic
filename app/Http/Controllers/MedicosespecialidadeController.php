@@ -108,4 +108,13 @@ class MedicosespecialidadeController extends Controller
         // return redirect()->route('medicosespecialidades.index')
         //     ->with('success', 'Medicosespecialidade deleted successfully');
     }
+    public function medesp(Request $request)
+    {
+        $esEsp=$request['idEspecialidad'];
+        $medicos=Medicosespecialidade::where('id_especialidad','=',$esEsp)->get();
+        foreach ($medicos as $medico) {
+            $medico['nombre']=$medico->user->name." ".$medico->user->apellidos;
+        }
+        return response()->json($medicos);
+    }
 }

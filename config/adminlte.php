@@ -316,7 +316,7 @@ return [
         // ],
         [
             'text'        => 'Citas',
-            'url'         => '#',
+            'route'         => 'citas.index',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',

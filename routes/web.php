@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CitaController;
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\MedicosespecialidadeController;
@@ -54,3 +55,8 @@ Route::resource('medicosespecialidades',MedicosespecialidadeController::class);
 
 
 route::get('verpacientes/{id}',[UserController::class,'verpacientes'])->name('ver.pacientes');
+
+
+Route::resource('citas', CitaController::class);
+
+Route::get('medesp',[MedicosespecialidadeController::class,'medesp'])->name('medesp.med');

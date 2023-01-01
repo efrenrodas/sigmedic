@@ -5,27 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Medicosespecialidade
+ * Class Cita
  *
  * @property $id
- * @property $id_medido
- * @property $id_especialidad
+ * @property $horario
+ * @property $id_paciente
+ * @property $id_medico
  * @property $estado
- * @property $precio
  * @property $created_at
  * @property $updated_at
  *
- * @property Especialidade $especialidade
+ * @property User $user
  * @property User $user
  * @package App
  * @mixin \Illuminate\Database\Eloquent\Builder
  */
-class Medicosespecialidade extends Model
+class Cita extends Model
 {
     
     static $rules = [
-		'id_medido' => 'required',
-		'id_especialidad' => 'required',
+		'horario' => 'required',
+		'id_paciente' => 'required',
+		'id_medico' => 'required',
 		'estado' => 'required',
     ];
 
@@ -36,23 +37,23 @@ class Medicosespecialidade extends Model
      *
      * @var array
      */
-    protected $fillable = ['id_medido','id_especialidad','estado','precio'];
+    protected $fillable = ['horario','id_paciente','id_medico','estado'];
 
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function especialidad()
+    public function paciente()
     {
-        return $this->hasOne('App\Models\Especialidade', 'id', 'id_especialidad');
+        return $this->hasOne('App\Models\User', 'id', 'id_medico');
     }
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
-    public function user()
+    public function medico()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_medido');
+        return $this->hasOne('App\Models\User', 'id', 'id_paciente');
     }
     
 
