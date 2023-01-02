@@ -115,6 +115,6 @@ class MedicosespecialidadeController extends Controller
         foreach ($medicos as $medico) {
             $medico['nombre']=$medico->user->name." ".$medico->user->apellidos;
         }
-        return response()->json($medicos);
+        return response()->json(['medicos'=>$medicos]);
     }
 }

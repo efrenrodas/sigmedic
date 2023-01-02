@@ -8,14 +8,14 @@
 @section('content')
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver medico</span>
+                            <span class="card-title">Medico</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ url()->previous() }}"> Regresar</a>
+                            <a class="btn btn-primary" href="{{ route('dame.medicos') }}"> Regresar</a>
                         </div>
                     </div>
 
@@ -53,7 +53,24 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <span class="card-title">Foto</span>
+                        </div>
+                        <div class="float-right">
+                            <a class="btn btn-primary" onclick="abrir('modalFoto')" > Cambiar</a>
+                        </div>
+                    </div>
 
+                    <div class="card-body">
+
+                        <img src="{{asset('storage').'/'.$user->imagen}}" alt="..." class="img-thumbnail">
+
+                    </div>
+                </div>
+            </div>
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
@@ -72,7 +89,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										{{-- <th>Medico</th> --}}
 										<th>Especialidad</th>
 										<th>Estado</th>
@@ -85,9 +102,9 @@
                                     @foreach ($medicoespe as $medicosespecialidade)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            
+
 											{{-- <td>{{ $medicosespecialidade->user->name }}</td> --}}
-											<td>{{ $medicosespecialidade->especialidade->nombre }}</td>
+											<td>{{ $medicosespecialidade->especialidad->nombre }}</td>
 											<td>{{ $medicosespecialidade->estado=='1'?'Activo':'Inactivo' }}</td>
 											<td>{{ $medicosespecialidade->precio }}</td>
 
@@ -109,8 +126,8 @@
                     </div>
                 </div>
             </div>
-        </div> 
-        
+        </div>
+
          {{-- modal de especialidades --}}
          <div class="modal fade" id="modalEspecialidad" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -132,8 +149,8 @@
                                 <option value="{{$especialidad->id}}" >{{$especialidad->nombre}}</option>
                                 @endforeach
                             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-                               
-                                
+
+
                               </select>
                         </div>
                         <div class="form-group">
@@ -145,17 +162,17 @@
                                 <option value="1">Activo</option>
                                 <option value="0">Inactivo</option>
                             {!! $errors->first('estado', '<div class="invalid-feedback">:message</div>') !!}
-                               
-                                
+
+
                               </select>
                         </div>
                         <div class="box-footer mt20">
                             <button type="submit" class="btn btn-primary">Agregar</button>
                         </div>
                     </form>
-                    
 
-                   
+
+
 
                 </div>
                 <div class="modal-footer">
@@ -166,6 +183,36 @@
             </div>
         </div>
   <!-- fin de modal  -->
+     {{-- modal de imagen de perfil --}}
+     <div class="modal fade" id="modalFoto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Agregar foto</h5>
+                <button onclick="cerrar('modalFoto')" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" action="{{ route('fotoMedico') }}"  role="form" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="id_medico" id="id_medico" value="{{$user->id}}">
+
+                   <input type="file" required class="form-control" name="imagen" id="imagen">
+                    &nbsp;
+                    <div class="box-footer mt20">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+
+                {{-- <button type="submit" class="btn btn-primary">Agregar</button> --}}
+            </div>
+            </div>
+        </div>
+    </div>
+<!-- fin de modal imagen  -->
     </section>
     @stop
 

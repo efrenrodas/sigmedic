@@ -7,6 +7,7 @@ use App\Models\Medicosespecialidade;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class UserController
@@ -160,5 +161,16 @@ class UserController extends Controller
        // return response()->json($especialidades);
         return view('user.show', compact('user'));
 
+    }
+    public function fotoMedico(Request $request)
+    {
+      //  return response()->json($request);
+        $user=User::find($request['id_medico']);
+        if ($request->hasFile('imagen')) {
+            Storage::delete('public/'.$user->imagen);
+           $user->imagen=$request->file('imagen')->store('medicos','public');
+           $user->save();
+        }
+        return redirect()->back();
     }
 }

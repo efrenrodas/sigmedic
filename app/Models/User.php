@@ -26,6 +26,7 @@ class User extends Authenticatable
         'genero',
         'ciudadResidencia',
         'email',
+        'imagen',
         'password',
     ];
 

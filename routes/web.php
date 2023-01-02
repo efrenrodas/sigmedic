@@ -3,6 +3,7 @@
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\EspecialidadeController;
 use App\Http\Controllers\MedicoController;
+use App\Http\Controllers\MedicohorarioController;
 use App\Http\Controllers\MedicosespecialidadeController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
@@ -58,5 +59,9 @@ route::get('verpacientes/{id}',[UserController::class,'verpacientes'])->name('ve
 
 
 Route::resource('citas', CitaController::class);
+Route::resource('medicohorarios', MedicohorarioController::class);
 
 Route::get('medesp',[MedicosespecialidadeController::class,'medesp'])->name('medesp.med');
+
+Route::post('fotomedico',[UserController::class,'fotoMedico'])->name('fotoMedico');
+
