@@ -106,4 +106,8 @@ class MedicohorarioController extends Controller
         return redirect()->route('medicohorarios.index')
             ->with('success', 'Medicohorario deleted successfully');
     }
+    public function crearCitas($desde,$hasta)
+    {
+        # code...
+    }
 }
