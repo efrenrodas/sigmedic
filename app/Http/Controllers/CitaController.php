@@ -108,4 +108,32 @@ class CitaController extends Controller
         return redirect()->route('citas.index')
             ->with('success', 'Cita deleted successfully');
     }
+    public function crear(Request $request)
+    {
+        # code...
+        $fecha=strtotime($request['fecha']);
+
+
+        $cita=new Cita();
+        $cita->horario=date("Y-m-d H:i:s", $fecha);
+        $cita->id_paciente=$request['paciente'];
+        $cita->id_medico=$request['medico'];
+        $cita->estado="1";
+        $cita->save();
+
+        return response()->json($request);
+    }
+    public function buscar(Request $request)
+    {
+        $medico=$request['medico'];
+        
+        $fecha=strtotime($request['fecha']);
+
+        $horario=date("Y-m-d H:i:s", $fecha);
+        if(Cita::where('id_medico','=',$medico)->where('horario','=',$horario)->count()>0){
+            return response()->json('existe');
+        }else{
+            return response()->json('no');
+        }
+    }
 }

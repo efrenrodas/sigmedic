@@ -65,3 +65,7 @@ Route::get('medesp',[MedicosespecialidadeController::class,'medesp'])->name('med
 
 Route::post('fotomedico',[UserController::class,'fotoMedico'])->name('fotoMedico');
 
+Route::get('crearcita',[CitaController::class,'crear'])->name('cita.crear');
+
+Route::get('buscarcita',[CitaController::class,'buscar'])->name('cita.buscar');
+

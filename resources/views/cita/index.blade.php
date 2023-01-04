@@ -256,22 +256,27 @@
                 '<div class="card-body">'+
                     '<h5 class="card-title">'+value.nombre+'</h5>'+
                     '<p class="card-text">$'+value.precio+'</p>'+
-                   ' <a onclick="seleccionar('+value.user.id+')"class="btn btn-primary">Sacar cita </a>'+
+                   ' <a onclick="seleccionar('+value.user.id+')"class="btn btn-primary">Seleccionar </a>'+
                 '</div>'+
                 '</div>'
             );
         });
 
     }
-    $(document).ready(function(){
-        var currentDate = new Date();
-      //  refreshEvents(currentDate);
-      //  showEvents(currentDate);
-    });
+    // $(document).ready(function(){
+    //     var currentDate = new Date();
+    //   //  refreshEvents(currentDate);
+    //      showEvents(currentDate);
+    // });
     function seleccionar(id) {
-        console.log(id);
+     //   removeAllEvents();
+      
         idMedico=id;
-     //   console.log({idUser});
+        var currentDate = new Date();
+       
+       calendar.set(currentDate);
+         showEvents(currentDate);
+
     }
 
 
@@ -333,10 +338,16 @@
         }
     };
 
-    var showEvents = function(date){
+    var showEvents =  function(date){
         // Skip weekends
-        if (date.getDay() === 0 || date.getDay() === 6) {
+       // elements.list.innerHTML = "";
+     //  removeAllEvents();
+        hoy=new Date();
+        if (date.getDay() === 0 || date.getDay() === 6 || date.getDay() < hoy.getDay()) {
+            //console.log(date);
             refreshEvents(new Date());
+            elements.subtitle.textContent = "No hay citas disponibles";
+
             return;
         }
        // Date string
@@ -344,6 +355,7 @@
 
         // If the date does not exist in the events object, create an empty array
         if (!events.hasOwnProperty(id)) {
+            console.log('existen eventos en este dia');
             events[id] = [];
 
             // Set the current date to the start of the day
@@ -358,11 +370,19 @@
             while (current < end) {
                 // Create the event object
                 var event = {
-                name: "Cita a las " + current.toLocaleTimeString()
+                name: "Cita a las " + current.toLocaleTimeString(),
+               // hora:current.toLocaleTimeString(),
+                hora:current.toLocaleTimeString(),
+                fecha:current.toLocaleDateString(),
                 };
-
-                // Add the event to the array
+               // verificar si esta disponible
+               fecha =current.toLocaleTimeString();
+                hora=current.toLocaleDateString();
+            if(disponible(fecha,hora)){
                 events[id].push(event);
+            }
+                // Add the event to the array
+               
                 // Add 30 minutes to the current date
                 current.setMinutes(current.getMinutes() + 30);
             }
@@ -384,7 +404,10 @@
         var div;
         var close;
         // For each event
+        var eventDatetime
         for (var i = 0; i < events[id].length; i++) {
+         
+
             div = document.createElement("div");
             div.className = "event-item";
             div.textContent = (i + 1) + ". " + events[id][i].name;
@@ -392,10 +415,21 @@
             var button = document.createElement("button");
             button.className = "close";
             button.textContent = "Agendar";
-            div.appendChild(button);
-            button.addEventListener("click", function() {
-                agendar();
-            });
+             div.appendChild(button);
+           
+            //verificar si la fecha esta disponible 
+              
+              // Almacena la fecha y hora del evento en una variable
+              
+          // Asigna un manejador de evento al botón para llamar a la función agendar
+            button.addEventListener("click", (function(index) {
+                return function() {
+                // Almacena la fecha y hora del evento en una variable
+                eventDatetime =events[id][index].fecha;
+                hora=events[id][index].hora;
+                agendar(eventDatetime,hora);
+                };
+            })(i));
         }
     };
 
@@ -406,14 +440,64 @@
     // Add events
     calendar.onDateClick(function(event, date){
         // Update calendar date
+        console.log('actualizando calendario');
         calendar.set(date);
         // Show events
         showEvents(date);
     });
 
 
-    function agendar() {
-        alert('asd')
+    function agendar(fecha,hora) {
+        fechafinal= fecha+' '+hora;
+        let route="{{route('cita.crear')}}";
+       $.ajax({
+        type:'GET',
+        url:route,
+        data:{
+            'fecha':fechafinal,
+            'paciente':idUser,
+            'medico':idMedico
+        },
+        success:function(response){
+            console.log(response);
+        }
+      })
+    }
+     function disponible(hora,fecha) {
+        fechafinal= fecha+' '+hora;
+        let estado='vacio';
+        let route="{{route('cita.buscar')}}";
+       $.ajax({
+        type:'GET',
+        url:route,
+        async:false,
+        data:{
+            'fecha':fechafinal,
+            'paciente':idUser,
+            'medico':idMedico
+        },
+        success:function(response){
+            console.log(response);
+            estado=response;
+        }
+      })
+      console.log(estado);
+      if (estado=='no') {
+        
+                return true;
+            }
+            else{
+                return false;
+            }
+    }
+    function removeAllEvents() {
+        // Loop through all dates in the events object
+        for (var date in events) {
+            if (events.hasOwnProperty(date)) {
+            // Clear the array of events for that date
+            events[date] = [];
+            }
+        }
     }
 
 </script>
