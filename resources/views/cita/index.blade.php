@@ -233,18 +233,18 @@
     function traeMedicos(idEsp) {
         console.log(idEsp);
        let route="{{route('medesp.med')}}";
-       $.ajax({
-        type:'GET',
-        url:route,
-        data:{
-            'idEspecialidad':idEsp,
-        },
-        success:function(response){
-          //  console.log(response)
-          llenaMedicos(response.medicos)
-        }
-       });
-     //  crearCitas();
+        $.ajax({
+            type:'GET',
+            url:route,
+            data:{
+                'idEspecialidad':idEsp,
+            },
+            success:function(response){
+            //  console.log(response)
+            llenaMedicos(response.medicos)
+            }
+        });
+        //  crearCitas();
     }
     function llenaMedicos(medicos) {
         $('#divMedicos').empty();
@@ -263,17 +263,13 @@
         });
 
     }
-    // $(document).ready(function(){
-    //     var currentDate = new Date();
-    //   //  refreshEvents(currentDate);
-    //      showEvents(currentDate);
-    // });
+
     function seleccionar(id) {
      //   removeAllEvents();
-      
+
         idMedico=id;
         var currentDate = new Date();
-       
+
        calendar.set(currentDate);
          showEvents(currentDate);
 
@@ -382,7 +378,7 @@
                 events[id].push(event);
             }
                 // Add the event to the array
-               
+
                 // Add 30 minutes to the current date
                 current.setMinutes(current.getMinutes() + 30);
             }
@@ -406,7 +402,7 @@
         // For each event
         var eventDatetime
         for (var i = 0; i < events[id].length; i++) {
-         
+
 
             div = document.createElement("div");
             div.className = "event-item";
@@ -416,11 +412,11 @@
             button.className = "close";
             button.textContent = "Agendar";
              div.appendChild(button);
-           
-            //verificar si la fecha esta disponible 
-              
+
+            //verificar si la fecha esta disponible
+
               // Almacena la fecha y hora del evento en una variable
-              
+
           // Asigna un manejador de evento al botón para llamar a la función agendar
             button.addEventListener("click", (function(index) {
                 return function() {
@@ -483,7 +479,7 @@
       })
       console.log(estado);
       if (estado=='no') {
-        
+
                 return true;
             }
             else{

@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Usuarios</h1>
+    <h1>Medicos</h1>
 @stop
 @section('content')
     <div class="container-fluid">
@@ -39,9 +39,9 @@
 
 										<th>Nombres</th>
 										<th>Apellidos</th>
-										<th>Email</th>
+										{{-- <th>Email</th> --}}
 										<th>Identificacion</th>
-										<th>Fecha de nacimiento</th>
+										{{-- <th>Fecha de nacimiento</th> --}}
 										<th>Genero</th>
 										<th>Ciudad de residencia</th>
 
@@ -55,16 +55,16 @@
 
 											<td>{{ $user->name }}</td>
 											<td>{{ $user->apellidos }}</td>
-											<td>{{ $user->email }}</td>
+											{{-- <td>{{ $user->email }}</td> --}}
 											<td>{{ $user->identificacion }}</td>
-											<td>{{ $user->fechaNaciemiento }}</td>
-											<td>{{ $user->genero }}</td>
+											{{-- <td>{{ $user->fechaNaciemiento }}</td> --}}
+											<td>{{ $user->genero->nombre }}</td>
 											<td>{{ $user->ciudadResidencia }}</td>
 
                                             <td>
                                                 <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                  
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
+
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('users.show',$user->id) }}"><i class="fas fa-tools"></i> </a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @csrf
                                                     @method('DELETE')

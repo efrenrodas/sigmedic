@@ -28,7 +28,8 @@
         </div>
         <div class="form-group">
             {{ Form::label('genero') }}
-            {{ Form::text('genero', $user->genero, ['class' => 'form-control' . ($errors->has('genero') ? ' is-invalid' : ''), 'placeholder' => 'Genero']) }}
+            {{-- {{ Form::text('genero', $user->genero, ['class' => 'form-control' . ($errors->has('genero') ? ' is-invalid' : ''), 'placeholder' => 'Genero']) }} --}}
+          {!! Form::select('id_genero', $generos, $user->id_genero, ['class' => 'form-control' . ($errors->has('genero') ? ' is-invalid' : ''), 'placeholder' => 'Genero']) !!}
             {!! $errors->first('genero', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">

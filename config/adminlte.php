@@ -347,12 +347,16 @@ return [
             'can'=>'desarrollar',
             'submenu' => [
                 [
+                    'text' => 'Géneros',
+                    'route'  => 'generos.index',
+                ],
+                [
                     'text' => 'Roles',
                     'route'  => 'roles.index',
                 ],
 
                 [
-                    'text' => 'Premisos',
+                    'text' => 'Permisos',
                     'route'  => 'permissions.index',
                 ],
             ],

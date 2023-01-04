@@ -108,6 +108,6 @@ class MedicohorarioController extends Controller
     }
     public function crearCitas($desde,$hasta)
     {
-        # code...
+
     }
 }

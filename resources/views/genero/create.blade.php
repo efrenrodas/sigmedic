@@ -3,26 +3,24 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Actualizar especialidades</h1>
+    <h1>Crear Genero</h1>
 @stop
-
 @section('content')
     <section class="content container-fluid">
-        <div class="">
+        <div class="row">
             <div class="col-md-12">
 
                 @includeif('partials.errors')
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Especialidades</span>
+                        <span class="card-title">Crear Género</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('especialidades.update', $especialidade->id) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
+                        <form method="POST" action="{{ route('generos.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('especialidade.form')
+                            @include('genero.form')
 
                         </form>
                     </div>
@@ -39,3 +37,4 @@
     @section('js')
 
     @stop
+

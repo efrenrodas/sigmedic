@@ -3,9 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Usuarios</h1>
+    <h1>Géneros </h1>
 @stop
-
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -15,12 +14,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Pacientes') }}
+                                {{ __('Género') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('users.create',['tipo'=>'paciente']) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Crear nuevo') }}
+                                <a href="{{ route('generos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Nuevo') }}
                                 </a>
                               </div>
                         </div>
@@ -38,37 +37,27 @@
                                     <tr>
                                         <th>No</th>
 
-										<th>Nombres</th>
-										<th>Apellidos</th>
-										{{-- <th>Email</th> --}}
-										<th>Identificacion</th>
-										<th>Fecha de nacimiento</th>
-										<th>Genero</th>
-										<th>Ciudad de residencia</th>
+										<th>Nombre</th>
+										{{-- <th>Estado</th> --}}
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $user)
+                                    @foreach ($generos as $genero)
                                         <tr>
                                             <td>{{ ++$i }}</td>
 
-											<td>{{ $user->name }}</td>
-											<td>{{ $user->apellidos }}</td>
-											{{-- <td>{{ $user->email }}</td> --}}
-											<td>{{ $user->identificacion }}</td>
-											<td>{{ $user->fechaNaciemiento }}</td>
-											<td>{{ $user->genero->nombre}}</td>
-											<td>{{ $user->ciudadResidencia }}</td>
+											<td>{{ $genero->nombre }}</td>
+											{{-- <td>{{ $genero->estado }}</td> --}}
 
                                             <td>
-                                                <form action="{{ route('users.destroy',$user->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('ver.pacientes',$user->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('users.edit',$user->id) }}"><i class="fa fa-fw fa-edit"></i></a>
+                                                <form action="{{ route('generos.destroy',$genero->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('generos.show',$genero->id) }}"><i class="fa fa-fw fa-eye"></i> </a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('generos.edit',$genero->id) }}"><i class="fa fa-fw fa-edit"></i> </a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> </button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -78,7 +67,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $users->links() !!}
+                {!! $generos->links() !!}
             </div>
         </div>
     </div>
@@ -91,3 +80,4 @@
     @section('js')
 
     @stop
+

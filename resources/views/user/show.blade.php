@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group">
                             <strong>Genero:</strong>
-                            {{ $user->genero }}
+                            {{ $user->genero->nombre }}
                         </div>
                         <div class="form-group">
                             <strong>Ciudad de residencia:</strong>

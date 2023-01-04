@@ -3,9 +3,8 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Actualizar especialidades</h1>
+    <h1>Actualizar Género </h1>
 @stop
-
 @section('content')
     <section class="content container-fluid">
         <div class="">
@@ -15,14 +14,14 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Actualizar Especialidades</span>
+                        <span class="card-title">Actualizar Género</span>
                     </div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('especialidades.update', $especialidade->id) }}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('generos.update', $genero->id) }}"  role="form" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             @csrf
 
-                            @include('especialidade.form')
+                            @include('genero.form')
 
                         </form>
                     </div>
@@ -39,3 +38,4 @@
     @section('js')
 
     @stop
+

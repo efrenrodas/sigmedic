@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Especialidade;
+use App\Models\Genero;
 use App\Models\Medicosespecialidade;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 /**
@@ -39,8 +41,9 @@ class UserController extends Controller
         $rol=$request['tipo'];
         $user = new User();
         $roles=Role::all();
+        $generos=Genero::pluck('nombre','id');
      #   return response()->json($roles);
-        return view('user.create', compact('user','roles','rol'));
+        return view('user.create', compact('user','roles','rol','generos'));
     }
 
     /**
@@ -51,9 +54,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-       # request()->validate(User::$rules);
-     //  return response()->json($request);
+       # request()->validate(User::$rules);Hash::make($data['password']),
+
      $rol=$request['rol'];
+        $password=$request['password'];
+        $request['password']=Hash::make($password);
+     //   return response()->json($request);
         $user = User::create($request->all());
         $user->assignRole($rol);
        switch ($rol) {

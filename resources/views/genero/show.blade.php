@@ -1,9 +1,10 @@
-@extends('layouts.app')
+@extends('adminlte::page')
 
-@section('template_title')
-    {{ $especialidade->name ?? 'Show Especialidade' }}
-@endsection
+@section('title', 'Dashboard')
 
+@section('content_header')
+    <h1>Ver géneros </h1>
+@stop
 @section('content')
     <section class="content container-fluid">
         <div class="row">
@@ -11,10 +12,10 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Ver Especialidades</span>
+                            <span class="card-title">Ver Género</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('especialidades.index') }}"> Back</a>
+                            <a class="btn btn-primary" href="{{ route('generos.index') }}"> Back</a>
                         </div>
                     </div>
 
@@ -22,11 +23,11 @@
 
                         <div class="form-group">
                             <strong>Nombre:</strong>
-                            {{ $especialidade->nombre }}
+                            {{ $genero->nombre }}
                         </div>
                         <div class="form-group">
                             <strong>Estado:</strong>
-                            {{ $especialidade->estado }}
+                            {{ $genero->estado }}
                         </div>
 
                     </div>
@@ -34,4 +35,12 @@
             </div>
         </div>
     </section>
-@endsection
+    @stop
+
+    @section('css')
+
+    @stop
+
+    @section('js')
+
+    @stop

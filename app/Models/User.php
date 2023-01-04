@@ -23,7 +23,7 @@ class User extends Authenticatable
         'apellidos',
         'identificacion',
         'fechaNaciemiento',
-        'genero',
+        'id_genero',
         'ciudadResidencia',
         'email',
         'imagen',
@@ -48,4 +48,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function genero()
+    {
+        return $this->hasOne('App\Models\Genero', 'id', 'id_genero');
+    }
 }

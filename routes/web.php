@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CitaController;
 use App\Http\Controllers\EspecialidadeController;
+use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\MedicohorarioController;
 use App\Http\Controllers\MedicosespecialidadeController;
@@ -69,3 +70,4 @@ Route::get('crearcita',[CitaController::class,'crear'])->name('cita.crear');
 
 Route::get('buscarcita',[CitaController::class,'buscar'])->name('cita.buscar');
 
+Route::resource('generos', GeneroController::class);
