@@ -25,12 +25,12 @@ class Cita extends Model
     
     static $rules = [
 		'horario' => 'required',
-		'id_paciente' => 'required',
+		// 'id_paciente' => 'required',
 		'id_medico' => 'required',
 		'estado' => 'required',
     ];
 
-    protected $perPage = 20;
+    protected $perPage = 25;
 
     /**
      * Attributes that should be mass-assignable.

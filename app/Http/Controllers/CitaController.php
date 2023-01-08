@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Especialidade;
 use App\Models\Medicosespecialidade;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 /**
@@ -32,9 +33,10 @@ class CitaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function create()
-    {
+    {   $rol="medico";
         $cita = new Cita();
-        return view('cita.create', compact('cita'));
+        $medicos= User::whereHas("roles", function($q) use ($rol){ $q->where("name", $rol); })->paginate();
+        return view('cita.create', compact('cita','medicos'));
     }
 
     /**
@@ -45,12 +47,35 @@ class CitaController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Cita::$rules);
+      //  return response()->json($request);
+        $start=$request['desde'];
+        $end=$request['hasta'];
+        $medico=$request['id_medico'];
+        for ($i=strtotime($start); $i <=strtotime($end) ; $i=$i+1800) { 
 
-        $cita = Cita::create($request->all());
+             // Obtener el día de la semana de la fecha actual del bucle (0 es domingo, 6 es sábado)
+            $day = date('w', $i);
+            // Obtener la hora de la fecha actual del bucle (en formato 'HH')
+            $hour = date('H', $i);
+            //obtener los minutos para no pasarse a las 18:30
+            $minutes=date('i',$i);
+            // Si el día es sábado o domingo, o la hora es menor que 8 o mayor que 18, saltar a la siguiente iteración del bucle
+            if ($day == 0 || $day == 6 || $hour < 8 || $hour > 18 ) {
+                continue;
+            }
+            $cita=new Cita();
+            $cita->horario=date('Y-m-d H:i:s', $i);
+            $cita->id_medico=$medico;
+            $cita->estado='0';
+            $cita->save();
+        }
+       // request()->validate(Cita::$rules);
 
-        return redirect()->route('citas.index')
-            ->with('success', 'Cita created successfully.');
+      //  $cita = Cita::create($request->all());
+      $citas=Cita::paginate();
+        return view('cita.inicio',compact('citas'))->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
+        // return redirect()->route('citas.index2')
+        //     ->with('success', 'Cita created successfully.');
     }
 
     /**
@@ -135,5 +160,22 @@ class CitaController extends Controller
         }else{
             return response()->json('no');
         }
+    }
+    public function traer(Request $request)
+    {
+        $medico=$request['medico'];
+        
+        $fecha=$request['fecha'];
+        $horaInicio="08:00:00";
+        $horaFin="18:00:00";
+        $fechaHora=date('Y-m-d H:i:s', strtotime("$fecha $horaInicio"));
+        $fin=date('Y-m-d H:i:s',strtotime("$fecha $horaFin"));
+
+    
+       
+
+        $citas=Cita::whereBetween('horario',[$fechaHora,$fin])->get();
+        return response()->json(['citas'=>$citas,'inicio'=>$fechaHora,'fin'=>$fin]);
+       
     }
 }

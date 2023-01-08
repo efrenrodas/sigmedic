@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Crear cita</h1>
+    <h1>Agenda</h1>
 @stop
 @section('content')
     <section class="content container-fluid">
@@ -14,7 +14,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">Create Cita</span>
+                        <span class="card-title">Crear Citas para el medico</span>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('citas.store') }}"  role="form" enctype="multipart/form-data">
