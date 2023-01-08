@@ -90,7 +90,7 @@
                         </div>
                     @endif
 
-                    <div class="card-body">
+                    <div class="row card-body">
                         <div class="table-responsive">
                             <div class="description">
                                 <div style="font-size: 1.4em;">Citas Medicas</div>
@@ -100,11 +100,10 @@
                         {{-- calendario --}}
                         <div id="wrapper">
                             <!-- Calendar element -->
-                            <div id="events-calendar" data-language="es" ></div>
+                            <div id="events-calendar" class="md-8" data-language="es" ></div>
                             <!-- Events -->
-                            <div id="events"></div>
-                            <!-- Clear -->
-                            <div class="clear"></div>
+                            <div id="events" class="md-4"></div>
+                          
                         </div>
                         <div class="clear"></div>
                         {{-- fin calendario --}}
@@ -275,7 +274,8 @@
         var currentDate = new Date();
        
        calendar.set(currentDate);
-         showEvents(currentDate);
+      //   showEvents(currentDate);
+      traerEventos(currentDate);
 
     }
 
@@ -317,125 +317,13 @@
     var current = null;
 
 
-    var refreshEvents = function(date){
-        // Date string
-       // date=null;
-     //   alert(date);
-        var id = jsCalendar.tools.dateToString(date, date_format, "es");
-        // Set date
-        current = new Date(date.getTime());
-        // Set title
-        elements.title.textContent = id;
-        // Clear old events
-        elements.list.innerHTML = "";
-        // Add events on list
-        if (events.hasOwnProperty(id) && events[id].length) {
-            // Number of events
-            elements.subtitle.textContent = events[id].length + " " + ((events[id].length > 1) ? "citas disponibles" : "cita disponible");
-        }
-        else {
-            elements.subtitle.textContent = "No hay citas disponibles";
-        }
-    };
-
-    var showEvents =  function(date){
-        // Skip weekends
-       // elements.list.innerHTML = "";
-     //  removeAllEvents();
-        hoy=new Date();
-        if (date.getDay() === 0 || date.getDay() === 6 || date.getDay() < hoy.getDay()) {
-            //console.log(date);
-            refreshEvents(new Date());
-            elements.subtitle.textContent = "No hay citas disponibles";
-
-            return;
-        }
-       // Date string
-        var id = jsCalendar.tools.dateToString(date, date_format, "es");
-
-        // If the date does not exist in the events object, create an empty array
-        if (!events.hasOwnProperty(id)) {
-            console.log('existen eventos en este dia');
-            events[id] = [];
-
-            // Set the current date to the start of the day
-            var current = new Date(date.getTime());
-            current.setHours(8, 0, 0, 0);
-
-            // Set the end date to the end of the day
-            var end = new Date(date.getTime());
-            end.setHours(18, 0, 0, 0);
-
-            // Create the events
-            while (current < end) {
-                // Create the event object
-                var event = {
-                name: "Cita a las " + current.toLocaleTimeString(),
-               // hora:current.toLocaleTimeString(),
-                hora:current.toLocaleTimeString(),
-                fecha:current.toLocaleDateString(),
-                };
-               // verificar si esta disponible
-               fecha =current.toLocaleTimeString();
-                hora=current.toLocaleDateString();
-            if(disponible(fecha,hora)){
-                events[id].push(event);
-            }
-                // Add the event to the array
-               
-                // Add 30 minutes to the current date
-                current.setMinutes(current.getMinutes() + 30);
-            }
-        }
-
-        // Set date
-        current = new Date(date.getTime());
-
-        // Set title
-        elements.title.textContent = id;
-
-        // Clear old events
-        elements.list.innerHTML = "";
-
-        // Add events on list
-        // Number of events
-        elements.subtitle.textContent = events[id].length + " " + ((events[id].length > 1) ? "Citas disponibles" : "Cita disponible");
-
-        var div;
-        var close;
-        // For each event
-        var eventDatetime
-        for (var i = 0; i < events[id].length; i++) {
-         
-
-            div = document.createElement("div");
-            div.className = "event-item";
-            div.textContent = (i + 1) + ". " + events[id][i].name;
-            elements.list.appendChild(div);
-            var button = document.createElement("button");
-            button.className = "close";
-            button.textContent = "Agendar";
-             div.appendChild(button);
-           
-            //verificar si la fecha esta disponible 
-              
-              // Almacena la fecha y hora del evento en una variable
-              
-          // Asigna un manejador de evento al botón para llamar a la función agendar
-            button.addEventListener("click", (function(index) {
-                return function() {
-                // Almacena la fecha y hora del evento en una variable
-                eventDatetime =events[id][index].fecha;
-                hora=events[id][index].hora;
-                agendar(eventDatetime,hora);
-                };
-            })(i));
-        }
-    };
+    elements.title.textContent="seleccione el horario";
+    elements.subtitle.textContent = "Citas disponibles";
+    
 
 
     // Show current date events
-    refreshEvents(new Date());
+   // refreshEvents(new Date());
 
     // Add events
     calendar.onDateClick(function(event, date){
@@ -443,10 +331,29 @@
         console.log('actualizando calendario');
         calendar.set(date);
         // Show events
-        showEvents(date);
+      //  showEvents(date);
+      traerEventos(date);
+
     });
 
-
+    function traerEventos(date) {
+      let  fecha=date.toISOString().split('T')[0];
+       console.log(fecha);
+       let route="{{route('cita.traer')}}";
+       $.ajax({
+        type:'GET',
+        url:route,
+        data:{
+            'fecha':fecha,
+         
+            'medico':idMedico
+        },
+        success:function(response){
+            console.log(response);
+            llenaCitas(response.citas)
+        }
+      })
+    }
     function agendar(fecha,hora) {
         fechafinal= fecha+' '+hora;
         let route="{{route('cita.crear')}}";
@@ -459,7 +366,8 @@
             'medico':idMedico
         },
         success:function(response){
-            console.log(response);
+          //  console.log(response);
+          
         }
       })
     }
@@ -490,15 +398,16 @@
                 return false;
             }
     }
-    function removeAllEvents() {
-        // Loop through all dates in the events object
-        for (var date in events) {
-            if (events.hasOwnProperty(date)) {
-            // Clear the array of events for that date
-            events[date] = [];
-            }
-        }
-    }
+  function llenaCitas(citas) {
+   
+    $('#events').empty();
+    
+    $.each(citas,function(index,value){
+        console.log(value.id);
+        $('#events').append('<div class="event-item">'+value.horario+'<a class="btn btn-outline-success">agendar</a></div>');
+    })
+    
+  }
 
 </script>
 @stop

@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('citas', function (Blueprint $table) {
             $table->id();
             $table->dateTime('horario');
-            $table->foreignId('id_paciente')->references('id')->on('users');
+            $table->foreignId('id_paciente')->nullable()->references('id')->on('users');
             $table->foreignId('id_medico')->references('id')->on('users');
             $table->integer('estado');
             $table->timestamps();
