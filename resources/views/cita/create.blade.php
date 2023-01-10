@@ -35,5 +35,10 @@
     @stop
 
     @section('js')
-
+    <script>
+        $('#id_medico').change(function(){
+            let idmedico= $('#id_medico').val();
+            console.log(idmedico);
+        })
+    </script>
     @stop

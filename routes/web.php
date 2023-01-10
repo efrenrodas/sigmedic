@@ -60,6 +60,7 @@ route::get('verpacientes/{id}',[UserController::class,'verpacientes'])->name('ve
 
 
 Route::resource('citas', CitaController::class);
+
 Route::resource('medicohorarios', MedicohorarioController::class);
 
 Route::get('medesp',[MedicosespecialidadeController::class,'medesp'])->name('medesp.med');

@@ -361,11 +361,11 @@ return [
                 ],
             ],
         ],
-        ['header' => 'labels'],
+        ['header' => 'Secretaria'],
         [
-            'text'       => 'roles',
+            'text'       => 'Agenda',
             'icon_color' => 'red',
-          //  'route'        => 'roles.index',
+            'route'        => 'citas.create',
         ],
         [
             'text'       => 'permisos',

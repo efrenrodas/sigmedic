@@ -105,7 +105,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $rol='';
-        return view('user.edit', compact('user','rol'));
+        $generos=Genero::pluck('nombre','id');
+        return view('user.edit', compact('user','rol','generos'));
     }
 
     /**
