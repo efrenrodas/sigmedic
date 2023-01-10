@@ -72,3 +72,4 @@ Route::get('buscarcita',[CitaController::class,'buscar'])->name('cita.buscar');
 
 Route::get('traercitas',[CitaController::class,'traer'])->name('cita.traer');
 
+Route::resource('generos', GeneroController::class);
