@@ -1,10 +1,9 @@
-@extends('adminlte::page')
+@extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('template_title')
+    Userenfermedade
+@endsection
 
-@section('content_header')
-    <h1>Citas</h1>
-@stop
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -14,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Cita') }}
+                                {{ __('Userenfermedade') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('userenfermedades.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -37,28 +36,26 @@
                                     <tr>
                                         <th>No</th>
                                         
-										<th>Horario</th>
-										<th> Paciente</th>
-										<th> Medico</th>
-										<th>Estado</th>
+										<th>Nombre</th>
+										<th>Medicamento</th>
+										<th>Id Paciente</th>
 
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($citas as $cita)
+                                    @foreach ($userenfermedades as $userenfermedade)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-											<td>{{ $cita->horario }}</td>
-											<td>{{ $cita->id_paciente }}</td>
-											<td>{{ $cita->medico->name }}</td>
-											<td>{{ $cita->estado }}</td>
+											<td>{{ $userenfermedade->nombre }}</td>
+											<td>{{ $userenfermedade->medicamento }}</td>
+											<td>{{ $userenfermedade->id_paciente }}</td>
 
                                             <td>
-                                                <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('citas.show',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <form action="{{ route('userenfermedades.destroy',$userenfermedade->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('userenfermedades.show',$userenfermedade->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('userenfermedades.edit',$userenfermedade->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
@@ -71,16 +68,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $citas->links() !!}
+                {!! $userenfermedades->links() !!}
             </div>
         </div>
     </div>
-    @stop
-
-    @section('css')
-
-    @stop
-
-    @section('js')
-
-    @stop
+@endsection

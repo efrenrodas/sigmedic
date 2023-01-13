@@ -10,7 +10,9 @@ use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleHasPermissionController;
+use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserenfermedadeController;
 use App\Models\Medicosespecialidade;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
@@ -74,3 +76,17 @@ Route::get('buscarcita',[CitaController::class,'buscar'])->name('cita.buscar');
 Route::get('traercitas',[CitaController::class,'traer'])->name('cita.traer');
 
 Route::resource('generos', GeneroController::class);
+
+
+Route::get('citaspaciente',[CitaController::class,'CitasPaciente'])->name('paciente.citas');
+
+Route::get('citasmedico',[CitaController::class,'CitasMedico'])->name('medico.citas');
+
+Route::get('atender/{id}',[CitaController::class,'atender'])->name('citas.atender');
+
+Route::resource('userenfermedades',UserenfermedadeController::class);
+
+
+Route::resource('sintomas',SintomaController::class);
+
+Route::get('editarsintoma',[SintomaController::class,'traer'])->name('sintoma.editar');

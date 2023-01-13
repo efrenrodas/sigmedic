@@ -45,7 +45,7 @@ class Cita extends Model
      */
     public function paciente()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_medico');
+        return $this->hasOne('App\Models\User', 'id', 'id_paciente');
     }
     
     /**
@@ -53,7 +53,7 @@ class Cita extends Model
      */
     public function medico()
     {
-        return $this->hasOne('App\Models\User', 'id', 'id_paciente');
+        return $this->hasOne('App\Models\User', 'id', 'id_medico');
     }
     
 

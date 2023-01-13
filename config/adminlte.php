@@ -377,6 +377,24 @@ return [
             'icon_color' => 'cyan',
             'url'        => '#',
         ],
+        ['header' => 'Paciente'],
+        [
+          'text' => 'Agendar',
+          'icon'    => 'fas fa-fw fa-lock',
+          'route'  => 'citas.index',
+        ],
+        [
+         'text' => 'Mis citas',
+         'icon'    => 'fas fa-fw fa-lock',
+         'route'  => 'paciente.citas',
+         ],
+         
+        ['header' => 'Medico'],
+        [
+            'text' => 'Mis citas',
+            'icon'    => 'fas fa-fw fa-lock',
+            'route'  => 'medico.citas',
+            ],
     ],
 
     /*

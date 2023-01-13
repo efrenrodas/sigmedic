@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Citas</h1>
+    <h1>Mi agenda</h1>
 @stop
 @section('content')
     <div class="container-fluid">
@@ -14,14 +14,14 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Cita') }}
+                                {{ __('Citas agendadas') }}
                             </span>
 
-                             <div class="float-right">
+                             {{-- <div class="float-right">
                                 <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
-                              </div>
+                              </div> --}}
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -39,10 +39,10 @@
                                         
 										<th>Horario</th>
 										<th> Paciente</th>
-										<th> Medico</th>
+										{{-- <th> Medico</th> --}}
 										<th>Estado</th>
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,17 +51,17 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $cita->horario }}</td>
-											<td>{{ $cita->id_paciente }}</td>
-											<td>{{ $cita->medico->name }}</td>
-											<td>{{ $cita->estado }}</td>
+											<td>{{ $cita->paciente->name }}</td>
+											{{-- <td>{{ $cita->medico->name }}</td> --}}
+											<td>{{ $cita->estado=='1'?'Agendada':'Cancelada' }}</td>
 
                                             <td>
                                                 <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('citas.show',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('citas.atender',$cita->id) }}"><i class="fa fa-chevron-right"></i> Atender</a>
+                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a> --}}
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    {{-- <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button> --}}
                                                 </form>
                                             </td>
                                         </tr>

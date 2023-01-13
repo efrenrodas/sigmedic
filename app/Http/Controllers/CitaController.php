@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Cita;
 use App\Models\Especialidade;
 use App\Models\Medicosespecialidade;
+use App\Models\Sintoma;
 use App\Models\User;
+use App\Models\Userenfermedade;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class CitaController
@@ -91,6 +94,15 @@ class CitaController extends Controller
         return view('cita.show', compact('cita'));
     }
 
+    public function atender($id)
+    {
+        $cita = Cita::find($id);
+        $userenfermedades=Userenfermedade::where('id_paciente','=',$cita->paciente->id)
+        ->paginate();
+        $sintomas=Sintoma::where('id_paciente','=',$cita->paciente->id)->where('id_cita','=',$id)->paginate();
+        return view('cita.atender', compact('cita','userenfermedades','sintomas'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -128,19 +140,22 @@ class CitaController extends Controller
      */
     public function destroy($id)
     {
-        $cita = Cita::find($id)->delete();
+        $cita = Cita::find($id);
 
-        return redirect()->route('citas.index')
-            ->with('success', 'Cita deleted successfully');
+        $cita->estado='0';
+        $cita->save();
+
+        return redirect()->route('paciente.citas')
+            ->with('success', 'Cita cancelada correctamente');
     }
     public function crear(Request $request)
     {
         # code...
         $fecha=strtotime($request['fecha']);
 
-
-        $cita=new Cita();
-        $cita->horario=date("Y-m-d H:i:s", $fecha);
+        $id=$request['id'];
+        $cita=Cita::find($id);
+      #  $cita->horario=date("Y-m-d H:i:s", $fecha);
         $cita->id_paciente=$request['paciente'];
         $cita->id_medico=$request['medico'];
         $cita->estado="1";
@@ -174,8 +189,25 @@ class CitaController extends Controller
     
        
 
-        $citas=Cita::whereBetween('horario',[$fechaHora,$fin])->get();
+        $citas=Cita::where('id_medico','=',$medico)->where('estado','=','0')->whereBetween('horario',[$fechaHora,$fin])->get();
         return response()->json(['citas'=>$citas,'inicio'=>$fechaHora,'fin'=>$fin]);
        
     }
+    public function CitasPaciente()
+    {
+        $idPaciente=Auth()->id();
+        $citas= Cita::where('id_paciente','=',$idPaciente)->paginate();
+        return view('cita.paciente', compact('citas'))
+            ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
+    }
+
+    public function CitasMedico()
+    {
+        $idMedico=Auth()->id();
+        $citas= Cita::where('id_medico','=',$idMedico)->where('estado','!=','0')->paginate();
+       # return response()->json($citas);
+        return view('cita.medico', compact('citas'))
+            ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
+    }
+   
 }

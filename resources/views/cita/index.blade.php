@@ -350,20 +350,21 @@
         }
       })
     }
-    function agendar(fecha,hora) {
-        fechafinal= fecha+' '+hora;
+    function agendar(id) {
+      
         let route="{{route('cita.crear')}}";
        $.ajax({
         type:'GET',
         url:route,
         data:{
-            'fecha':fechafinal,
+            'id':id,
             'paciente':idUser,
             'medico':idMedico
         },
         success:function(response){
-          //  console.log(response);
-
+           console.log(response);
+            //llebar a mis citas
+            window.location.href='{{route("paciente.citas")}}';
         }
       })
     }
@@ -399,8 +400,10 @@
     $('#events').empty();
 
     $.each(citas,function(index,value){
-        console.log(value.id);
-        $('#events').append('<div class="event-item">'+value.horario+'<a class="btn btn-outline-success">agendar</a></div>');
+      //  console.log(value.id);
+      //let horario = value.horario;
+      $(`#events`).append(`<div class="event-item"> ${value.horario} <a onclick="agendar('${value.id}')" class="btn btn-outline-success">agendar</a></div>`);
+
     })
 
   }
