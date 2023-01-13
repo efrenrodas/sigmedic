@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\CitaController;
+use App\Http\Controllers\DiagnosticoController;
 use App\Http\Controllers\EspecialidadeController;
+use App\Http\Controllers\ExameneController;
 use App\Http\Controllers\GeneroController;
 use App\Http\Controllers\MedicoController;
 use App\Http\Controllers\MedicohorarioController;
@@ -90,3 +92,9 @@ Route::resource('userenfermedades',UserenfermedadeController::class);
 Route::resource('sintomas',SintomaController::class);
 
 Route::get('editarsintoma',[SintomaController::class,'traer'])->name('sintoma.editar');
+
+
+Route::resource('examenes',ExameneController::class);
+
+
+Route::resource('diagnosticos',DiagnosticoController::class);

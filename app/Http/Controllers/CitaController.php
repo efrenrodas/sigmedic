@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cita;
+use App\Models\Diagnostico;
 use App\Models\Especialidade;
+use App\Models\Examene;
 use App\Models\Medicosespecialidade;
 use App\Models\Sintoma;
 use App\Models\User;
@@ -54,7 +56,7 @@ class CitaController extends Controller
         $start=$request['desde'];
         $end=$request['hasta'];
         $medico=$request['id_medico'];
-        for ($i=strtotime($start); $i <=strtotime($end) ; $i=$i+1800) { 
+        for ($i=strtotime($start); $i <=strtotime($end) ; $i=$i+1800) {
 
              // Obtener el día de la semana de la fecha actual del bucle (0 es domingo, 6 es sábado)
             $day = date('w', $i);
@@ -100,7 +102,10 @@ class CitaController extends Controller
         $userenfermedades=Userenfermedade::where('id_paciente','=',$cita->paciente->id)
         ->paginate();
         $sintomas=Sintoma::where('id_paciente','=',$cita->paciente->id)->where('id_cita','=',$id)->paginate();
-        return view('cita.atender', compact('cita','userenfermedades','sintomas'));
+        $examenes=Examene::where('id_cita','=',$id)->get();
+        $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','presuntivo')->get();
+
+        return view('cita.atender', compact('cita','userenfermedades','sintomas','examenes','diagnosticos'));
     }
 
     /**
@@ -166,7 +171,7 @@ class CitaController extends Controller
     public function buscar(Request $request)
     {
         $medico=$request['medico'];
-        
+
         $fecha=strtotime($request['fecha']);
 
         $horario=date("Y-m-d H:i:s", $fecha);
@@ -179,19 +184,19 @@ class CitaController extends Controller
     public function traer(Request $request)
     {
         $medico=$request['medico'];
-        
+
         $fecha=$request['fecha'];
         $horaInicio="08:00:00";
         $horaFin="18:00:00";
         $fechaHora=date('Y-m-d H:i:s', strtotime("$fecha $horaInicio"));
         $fin=date('Y-m-d H:i:s',strtotime("$fecha $horaFin"));
 
-    
-       
+
+
 
         $citas=Cita::where('id_medico','=',$medico)->where('estado','=','0')->whereBetween('horario',[$fechaHora,$fin])->get();
         return response()->json(['citas'=>$citas,'inicio'=>$fechaHora,'fin'=>$fin]);
-       
+
     }
     public function CitasPaciente()
     {
@@ -209,5 +214,5 @@ class CitaController extends Controller
         return view('cita.medico', compact('citas'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
-   
+
 }

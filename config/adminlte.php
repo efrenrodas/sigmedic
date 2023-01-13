@@ -315,86 +315,110 @@ return [
         //     'can'  => 'manage-blog',
         // ],
         [
-            'text'        => 'Citas',
-            'route'         => 'citas.index',
+            'text'        => 'Panel',
+            'route'         => 'home',
             'icon'        => 'far fa-fw fa-file',
             'label'       => 4,
             'label_color' => 'success',
             'can'=>'agendar',
         ],
-        ['header' => 'Gestión de '],
         [
-            'text' => 'Pacientes',
-            'route'  => 'dame.pacientes',
-            'icon' => 'fas fa-fw fa-user',
-            'can'=>'registrar',
-        ],
-        [
-            'text' => 'Medicos',
-            'route'  => 'dame.medicos',
-            'icon' => 'fas fa-fw fa-user-md',
-            'can'=>'registrar',
-        ],
-        [
-            'text' => 'Especialidades',
-            'route'  => 'especialidades.index',
-            'icon' => 'fas fa-fw fa-check-square',
-            'can'=>'registrar',
-        ],
-        [
-            'text'    => 'Configuración',
-            'icon'    => 'fas fa-fw fa-lock',
-            'can'=>'desarrollar',
-            'submenu' => [
-                [
-                    'text' => 'Géneros',
-                    'route'  => 'generos.index',
-                ],
-                [
-                    'text' => 'Roles',
-                    'route'  => 'roles.index',
-                ],
 
-                [
-                    'text' => 'Permisos',
-                    'route'  => 'permissions.index',
+            'text' => 'Gestión',
+            'can'=>'registrar',
+            'icon'=>'fas fa-tools',
+
+            'submenu'=>[[
+                'text' => 'Pacientes',
+                'route'  => 'dame.pacientes',
+                'icon' => 'fas fa-fw fa-user',
+
+            ],
+            [
+                'text' => 'Medicos',
+                'route'  => 'dame.medicos',
+                'icon' => 'fas fa-fw fa-user-md',
+
+            ],
+            [
+                'text' => 'Especialidades',
+                'route'  => 'especialidades.index',
+                'icon' => 'fas fa-fw fa-check-square',
+                'can'=>'registrar',
+            ],
+            [
+                'text'    => 'Configuración',
+                'icon'    => 'fas fa-fw fa-lock',
+                'can'=>'desarrollar',
+                'submenu' => [
+                    [
+                        'text' => 'Géneros',
+                        'route'  => 'generos.index',
+                    ],
+                    [
+                        'text' => 'Roles',
+                        'route'  => 'roles.index',
+                    ],
+
+                    [
+                        'text' => 'Permisos',
+                        'route'  => 'permissions.index',
+                    ],
                 ],
             ],
         ],
-        ['header' => 'Secretaria'],
-        [
-            'text'       => 'Agenda',
-            'icon_color' => 'red',
-            'route'        => 'citas.create',
         ],
+
+
+
         [
-            'text'       => 'permisos',
-            'icon_color' => 'yellow',
-          //  'route'        => 'permissions.index',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
-        ['header' => 'Paciente'],
-        [
-          'text' => 'Agendar',
-          'icon'    => 'fas fa-fw fa-lock',
-          'route'  => 'citas.index',
-        ],
-        [
-         'text' => 'Mis citas',
-         'icon'    => 'fas fa-fw fa-lock',
-         'route'  => 'paciente.citas',
-         ],
-         
-        ['header' => 'Medico'],
-        [
-            'text' => 'Mis citas',
-            'icon'    => 'fas fa-fw fa-lock',
-            'route'  => 'medico.citas',
+            'text' => 'Secretaria',
+            'can'=>'secretaria',
+            'icon'=>'fas fa-user-nurse',
+            'submenu'=> [[
+                'text'       => 'Agenda',
+                'icon_color' => 'red',
+                'route'        => 'citas.create',
             ],
+            [
+                'text'       => 'information',
+                'icon_color' => 'cyan',
+                'url'        => '#',
+            ],
+        ],
+        ],
+
+        [
+            'text' => 'Paciente',
+            'can'=>'agendar',
+            'icon'=>'fas fa-user-injured',
+            'submenu' =>[[
+                'text' => 'Agendar',
+                'icon'    => 'fas fa-calendar-alt',
+                'route'  => 'citas.index',
+              ],
+              [
+               'text' => 'Mis citas',
+               'icon'    => 'fas fa-tasks',
+               'route'  => 'paciente.citas',
+               ],
+            ],
+        ],
+
+
+        [
+            'text' => 'Medico',
+            'can'=>'medicina',
+            'icon'=>'fas fa-user-md',
+            'submenu'=>[
+                [
+                    'text' => 'Mis citas',
+                    'icon'    => 'fas fa-weight',
+                    'route'  => 'medico.citas',
+                    ],
+            ]
+        ],
+
     ],
 
     /*
