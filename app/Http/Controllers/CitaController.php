@@ -7,6 +7,7 @@ use App\Models\Diagnostico;
 use App\Models\Especialidade;
 use App\Models\Examene;
 use App\Models\Medicosespecialidade;
+use App\Models\Receta;
 use App\Models\Sintoma;
 use App\Models\User;
 use App\Models\Userenfermedade;
@@ -213,6 +214,13 @@ class CitaController extends Controller
        # return response()->json($citas);
         return view('cita.medico', compact('citas'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
+    }
+
+    public function consulta($id)
+    {
+        $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','definitivo')->get();
+        $receta=Receta::where('id_cita','=',$id)->get();
+        return view('cita.consulta',compact('diagnosticos','receta'));
     }
 
 }

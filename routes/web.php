@@ -10,6 +10,7 @@ use App\Http\Controllers\MedicohorarioController;
 use App\Http\Controllers\MedicosespecialidadeController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
+use App\Http\Controllers\RecetaController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\SintomaController;
@@ -98,3 +99,8 @@ Route::resource('examenes',ExameneController::class);
 
 
 Route::resource('diagnosticos',DiagnosticoController::class);
+
+
+Route::resource('recetas',RecetaController::class);
+
+Route::get('consulta/{id}',[CitaController::class,'consulta'])->name('consulta.atender');
