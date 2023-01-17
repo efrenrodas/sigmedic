@@ -13,6 +13,7 @@ use App\Models\User;
 use App\Models\Userenfermedade;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 /**
  * Class CitaController
@@ -203,6 +204,9 @@ class CitaController extends Controller
     {
         $idPaciente=Auth()->id();
         $citas= Cita::where('id_paciente','=',$idPaciente)->paginate();
+        $pdf=Pdf::loadView('pdf.agenda');
+        $pdf->download('cita.pdf');
+       
         return view('cita.paciente', compact('citas'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
@@ -221,6 +225,12 @@ class CitaController extends Controller
         $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','definitivo')->get();
         $receta=Receta::where('id_cita','=',$id)->get();
         return view('cita.consulta',compact('diagnosticos','receta'));
+    }
+
+    public function cita()
+    {
+        $pdf=Pdf::loadView('pdf.agenda');
+       return $pdf->download('cita.pdf');
     }
 
 }

@@ -72,13 +72,13 @@
                             <div class="col-md-6">
                                 {{-- <input id="fechaNacimiento" type="date" class="form-control @error('fechaNacimiento') is-invalid @enderror" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" required autocomplete="fechaNacimiento" autofocus> --}}
                                 <select class="form-control" name="genero" id="genero">
-                                    <option value="masculino">Masculino</option>
-                                    <option value="femenino">Femenino</option>
-                                    <option value="otro">Otro</option>
+                                    <option value="1">Masculino</option>
+                                    <option value="2">Femenino</option>
+                                    <option value="3">Otro</option>
                                 </select>
                             </div>
                         </div>
-
+ 
                         <div class="row mb-3">
                             <label for="ciudadResidencia" class="col-md-4 col-form-label text-md-end">{{ __('Ciudad de residencia') }}</label>
 

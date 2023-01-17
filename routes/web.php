@@ -104,3 +104,8 @@ Route::resource('diagnosticos',DiagnosticoController::class);
 Route::resource('recetas',RecetaController::class);
 
 Route::get('consulta/{id}',[CitaController::class,'consulta'])->name('consulta.atender');
+
+
+#pdf
+
+Route::get('/verpdf',[CitaController::class,'cita']);
