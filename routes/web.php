@@ -17,6 +17,7 @@ use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\SintomaController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserenfermedadeController;
+use App\Models\Genero;
 use App\Models\Medicosespecialidade;
 use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
@@ -33,7 +34,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $generos=Genero::all();
+    return view('welcome',compact('generos'));
 });
 
 Auth::routes();
@@ -118,5 +120,9 @@ Route::get('imprimirreceta/{id}',[RecetaController::class,'imprimir'])->name('re
 
 
 Route::resource('reportes',ReportesController::class);
-
+#citas por especialidad
 Route::get('repcitasesp',[ReportesController::class,'citasesp'])->name('reporte.citas.especialidad');
+#citas por medico
+Route::get('repcitasmed',[ReportesController::class,'dameMedicos'])->name('reporte.citas.medico');
+#citas por mes
+Route::get('repcitasmes',[ReportesController::class,'dameCitas'])->name('reporte.citas.mes');

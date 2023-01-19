@@ -151,8 +151,8 @@ class CitaController extends Controller
     public function destroy($id)
     {
         $cita = Cita::find($id);
-        $cita->id_especialidad=null;
-        $cita->estado='0';
+        #$cita->id_especialidad=null;
+        $cita->estado='3';
         $cita->save();
 
         return redirect()->route('paciente.citas')
@@ -200,7 +200,7 @@ class CitaController extends Controller
 
 
 
-        $citas=Cita::where('id_medico','=',$medico)->where('estado','=','0')->whereBetween('horario',[$fechaHora,$fin])->get();
+        $citas=Cita::where('id_medico','=',$medico)->whereIn('estado', [0, 3])->whereBetween('horario',[$fechaHora,$fin])->get();
         return response()->json(['citas'=>$citas,'inicio'=>$fechaHora,'fin'=>$fin]);
 
     }

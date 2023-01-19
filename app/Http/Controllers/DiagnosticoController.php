@@ -43,7 +43,7 @@ class DiagnosticoController extends Controller
      */
     public function store(Request $request)
     {
-        return response()->json($request);
+       # return response()->json($request);
         request()->validate(Diagnostico::$rules);
 
         $diagnostico = Diagnostico::create($request->all());

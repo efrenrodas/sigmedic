@@ -30,12 +30,12 @@
 
                         <div class="form-group">
                             <strong>Reporte de médicos con citas atendidas</strong>
-                            <a class="btn btn-sm btn-primary " href=""><i class="fa fa-chevron-right"></i></a>
+                            <a class="btn btn-sm btn-primary " href="{{route('reporte.citas.medico')}}"><i class="fa fa-chevron-right"></i></a>
 
                         </div>
                         <div class="form-group">
                             <strong>Reporte de citas atendidas por mes</strong>
-                            <a class="btn btn-sm btn-primary " href=""><i class="fa fa-chevron-right"></i></a>
+                            <a class="btn btn-sm btn-primary " href="{{route('reporte.citas.mes')}}"><i class="fa fa-chevron-right"></i></a>
 
                         </div>
 

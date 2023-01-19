@@ -27,7 +27,8 @@ class Cita extends Model
 		'horario' => 'required',
 		// 'id_paciente' => 'required',
 		'id_medico' => 'required',
-		'estado' => 'required',
+		'estado' => 'required'
+        
     ];
 
     protected $perPage = 25;
@@ -37,7 +38,7 @@ class Cita extends Model
      *
      * @var array
      */
-    protected $fillable = ['horario','id_paciente','id_medico','estado'];
+    protected $fillable = ['horario','id_paciente','id_medico','estado','id_especialidad'];
 
 
     /**
@@ -55,6 +56,13 @@ class Cita extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_medico');
     }
+
+    public function especialidad()
+    {
+      #  return $this->hasOne('App\Models\Especialidade', 'id', 'id_especialidad');
+      return $this->belongsTo('App\Models\Especialidade', 'id_especialidad', 'id');
+    }
+   
     
 
 }

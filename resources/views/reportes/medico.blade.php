@@ -12,7 +12,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Cantidad de citas por especialidad</span>
+                            <span class="card-title">Cantidad de citas por medico</span>
                         </div>
                         {{-- <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('recetas.index') }}"> Back</a>
@@ -26,7 +26,7 @@
                                     {{-- <th>No</th> --}}
 
                                     <th>Nombre</th>
-                                    {{-- <th>Creadas</th> --}}
+                                    <th>Creadas</th>
                                     <th>Agendadas</th>
                                     <th>En proceso</th>
                                     <th>Canceladas</th>
@@ -35,17 +35,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($especialidades as $especialidad)
+                                @foreach ($users as $usuario)
                                     <tr>
-                                        <td>{{ $especialidad->nombre }}</td>
+                                        <td>{{ $usuario->name }}</td>
 
-                                        {{-- <td>{{$especialidad->citas()->where("estado",0)->count()}}</td> --}}
-                                        <td>{{ $especialidad->citas()->where("estado",1)->count() }}</td>
+                                        <td>{{$usuario->citas()->where("estado",0)->count()}}</td>
+                                        <td>{{ $usuario->citas()->where("estado",1)->count() }}</td>
 
-                                        <td>{{$especialidad->citas()->where("estado",2)->count()}}</td>
-                                        <td>{{$especialidad->citas()->where("estado",3)->count()}}</td>
-                                        <td>{{$especialidad->citas()->where("estado",4)->count()}}</td>
-                                        <td>{{$especialidad->citas()->count()}}</td>
+                                        <td>{{$usuario->citas()->where("estado",2)->count()}}</td>
+                                        <td>{{$usuario->citas()->where("estado",3)->count()}}</td>
+                                        <td>{{$usuario->citas()->where("estado",4)->count()}}</td>
+                                        <td>{{$usuario->citas()->count()}}</td>
 
                                     </tr>
                                 @endforeach

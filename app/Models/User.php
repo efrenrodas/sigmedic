@@ -59,4 +59,9 @@ class User extends Authenticatable
         #return $this->hasMany('App\Models\RoleHasPermission', 'role_id', 'id');
         return $this->hasMany('App\Models\Medicosespecialidade','id_medido','id');
     }
+    public function citas()
+    {
+        # code...
+        return $this->hasMany('App\Models\Cita','id_medico','id');
+    }
 }

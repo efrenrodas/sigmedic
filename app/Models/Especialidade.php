@@ -33,10 +33,11 @@ class Especialidade extends Model
      */
     protected $fillable = ['nombre','estado'];
 
-    public function medicosesp()
+    public function citas()
     {
-        return $this->hasMany('App\Models\Medicosespecialidade','id_especialidad','id');
+        return $this->hasMany('App\Models\Cita','id_especialidad','id');
         #return $this->hasMany('App\Models\Medicosespecialidade','id_medido','id');
     }
+    
 
 }
