@@ -36,7 +36,7 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Horario</th>
 										<th> Paciente</th>
 										{{-- <th> Medico</th> --}}
@@ -49,11 +49,28 @@
                                     @foreach ($citas as $cita)
                                         <tr>
                                             <td>{{ ++$i }}</td>
-                                            
+
 											<td>{{ $cita->horario }}</td>
 											<td>{{ $cita->paciente->name }}</td>
 											{{-- <td>{{ $cita->medico->name }}</td> --}}
-											<td>{{ $cita->estado=='1'?'Agendada':'Cancelada' }}</td>
+											<td>
+                                                @switch($cita->estado)
+                                                    @case(1)
+                                                        Agendada
+                                                        @break
+                                                    @case(2)
+                                                        En proceso
+                                                        @break
+                                                    @case(3)
+                                                        Cancelada
+                                                        @break
+                                                        @case(4)
+                                                        Finalizada
+                                                        @break
+                                                    @default
+
+                                                @endswitch
+                                               </td>
 
                                             <td>
                                                 <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">

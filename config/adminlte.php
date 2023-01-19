@@ -418,6 +418,18 @@ return [
                     ],
             ]
         ],
+        [
+            'text' => 'Reportes',
+            'can'=>'administrar',
+            'icon'=>'fa fa-flag',
+            'submenu'=>[
+                [
+                    'text' => 'Reportes',
+                    'icon'    => 'fa fa-table',
+                    'route'  => 'reportes.index',
+                    ],
+            ]
+        ],
 
     ],
 

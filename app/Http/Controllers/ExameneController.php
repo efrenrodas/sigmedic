@@ -44,7 +44,7 @@ class ExameneController extends Controller
     public function store(Request $request)
     {
         //return response()->json($request);
-        request()->validate(Examene::$rules);
+     #   request()->validate(Examene::$rules);
 
         $examene = Examene::create($request->all());
 

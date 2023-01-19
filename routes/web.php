@@ -11,6 +11,7 @@ use App\Http\Controllers\MedicosespecialidadeController;
 use App\Http\Controllers\PacienteController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RecetaController;
+use App\Http\Controllers\ReportesController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\RoleHasPermissionController;
 use App\Http\Controllers\SintomaController;
@@ -86,6 +87,8 @@ Route::get('citaspaciente',[CitaController::class,'CitasPaciente'])->name('pacie
 Route::get('citasmedico',[CitaController::class,'CitasMedico'])->name('medico.citas');
 
 Route::get('atender/{id}',[CitaController::class,'atender'])->name('citas.atender');
+#finalizar una atención medica
+Route::get('finalizar/{id}',[CitaController::class,'finalizar'])->name('citas.finalizar');
 
 Route::resource('userenfermedades',UserenfermedadeController::class);
 
@@ -110,3 +113,10 @@ Route::get('ir/{id}',[CitaController::class,'ir'])->name('cita.ir');
 
 #pdf
 Route::get('/verpdf',[CitaController::class,'cita']);
+#imprimir una receta
+Route::get('imprimirreceta/{id}',[RecetaController::class,'imprimir'])->name('receta.imprimir');
+
+
+Route::resource('reportes',ReportesController::class);
+
+Route::get('repcitasesp',[ReportesController::class,'citasesp'])->name('reporte.citas.especialidad');

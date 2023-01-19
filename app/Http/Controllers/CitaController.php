@@ -80,7 +80,8 @@ class CitaController extends Controller
 
       //  $cita = Cita::create($request->all());
       $citas=Cita::paginate();
-        return view('cita.inicio',compact('citas'))->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
+      return redirect()->back();
+      // return view('cita.inicio',compact('citas'))->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
         // return redirect()->route('citas.index2')
         //     ->with('success', 'Cita created successfully.');
     }
@@ -101,6 +102,8 @@ class CitaController extends Controller
     public function atender($id)
     {
         $cita = Cita::find($id);
+        $cita->estado='2';
+        $cita->save();
         $userenfermedades=Userenfermedade::where('id_paciente','=',$cita->paciente->id)
         ->paginate();
         $sintomas=Sintoma::where('id_paciente','=',$cita->paciente->id)->where('id_cita','=',$id)->paginate();
@@ -148,7 +151,7 @@ class CitaController extends Controller
     public function destroy($id)
     {
         $cita = Cita::find($id);
-
+        $cita->id_especialidad=null;
         $cita->estado='0';
         $cita->save();
 
@@ -165,6 +168,7 @@ class CitaController extends Controller
       #  $cita->horario=date("Y-m-d H:i:s", $fecha);
         $cita->id_paciente=$request['paciente'];
         $cita->id_medico=$request['medico'];
+        $cita->id_especialidad=$request['especialidad'];
         $cita->estado="1";
         $cita->save();
 
@@ -206,7 +210,7 @@ class CitaController extends Controller
         $citas= Cita::where('id_paciente','=',$idPaciente)->paginate();
         $pdf=Pdf::loadView('pdf.agenda');
         $pdf->download('cita.pdf');
-       
+
         return view('cita.paciente', compact('citas'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
@@ -239,11 +243,24 @@ class CitaController extends Controller
         ->paginate();
         $sintomas=Sintoma::where('id_paciente','=',$cita->paciente->id)->where('id_cita','=',$id)->paginate();
         $examenes=Examene::where('id_cita','=',$id)->get();
-        $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','presuntivo')->get();
+        $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','definitivo')->get();
         $recetas=Receta::where('id_cita','=',$id)->get();
         return view('cita.consulta', compact('cita','userenfermedades','sintomas','examenes','diagnosticos','recetas'));
 
        #return response()->json($id);
+    }
+    public function finalizar($id)
+    {
+        # code...
+        #0 creada
+        #1 agendada
+        #2 procesp
+        #3 cancelada
+        #4 finalizada
+        $cita=Cita::find($id);
+        $cita->estado='4';
+        $cita->save();
+        return redirect()->route('medico.citas');
     }
 
 }

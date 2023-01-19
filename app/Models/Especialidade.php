@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Especialidade extends Model
 {
-    
+
     static $rules = [
 		'nombre' => 'required',
 		'estado' => 'required',
@@ -33,6 +33,10 @@ class Especialidade extends Model
      */
     protected $fillable = ['nombre','estado'];
 
-
+    public function medicosesp()
+    {
+        return $this->hasMany('App\Models\Medicosespecialidade','id_especialidad','id');
+        #return $this->hasMany('App\Models\Medicosespecialidade','id_medido','id');
+    }
 
 }

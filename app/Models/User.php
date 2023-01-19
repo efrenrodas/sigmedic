@@ -53,4 +53,10 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Genero', 'id', 'id_genero');
     }
+
+    public function medicoespecialidades()
+    {
+        #return $this->hasMany('App\Models\RoleHasPermission', 'role_id', 'id');
+        return $this->hasMany('App\Models\Medicosespecialidade','id_medido','id');
+    }
 }

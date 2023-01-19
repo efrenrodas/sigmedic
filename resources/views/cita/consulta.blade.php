@@ -48,7 +48,7 @@
                 </div>
             </div>
         </div>
-    
+
         {{-- examenes --}}
         <div class="row">
             <div class="col-md-12">
@@ -167,8 +167,12 @@
                         <div class="float-left">
                             <span class="card-title">Receta</span>
                         </div>
+
+
                         <div class="float-right">
-                            <button onclick="abrir('modalDiagnostico')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                            <a href="{{route('receta.imprimir',$cita->id)}}"  class="btn btn-success btn-sm"><i class="fa fa-print"></i></a>
+
+                            <button onclick="abrir('modalReceta')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
                         </div>
                     </div>
 
@@ -178,36 +182,36 @@
                                 <thead class="thead">
                                     <tr>
                                         <th>No</th>
-                                        
+
 										<th>Medicamento</th>
-										<th>Dodis</th>
+										<th>Dosis</th>
 										<th>Duracion</th>
 										<th>Instrucciones</th>
-										<th>Notas</th>
+										{{-- <th>Notas</th> --}}
 										{{-- <th>Id Cita</th> --}}
 
-                                        <th></th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($recetas as $receta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
+                                            <td>{{ $loop->iteration }}</td>
+
 											<td>{{ $receta->medicamento }}</td>
 											<td>{{ $receta->dodis }}</td>
 											<td>{{ $receta->duracion }}</td>
 											<td>{{ $receta->instrucciones }}</td>
-											<td>{{ $receta->notas }}</td>
+											{{-- <td>{{ $receta->notas }}</td> --}}
 											{{-- <td>{{ $receta->id_cita }}</td> --}}
 
                                             <td>
                                                 <form action="{{ route('recetas.destroy',$receta->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('recetas.show',$receta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('recetas.edit',$receta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('recetas.show',$receta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
+                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('recetas.edit',$receta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a> --}}
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
                                                 </form>
                                             </td>
                                         </tr>
@@ -223,11 +227,11 @@
         <div class="row">
             <div class="col-md-6">
                 {{-- <input id="buscaProds" class="form-control form-control-lg" type="text" placeholder="Escriba el nombre / codigo" aria-label=".form-control-lg example"> --}}
-                <button  class="form-control form-control-lg btn btn-warning">Atras</button>
+                <a href="{{route('citas.atender',$cita->id)}}" class="form-control form-control-lg btn btn-warning">Atras</a>
             </div>
             <div class="col-md-6">
                 {{-- <input id="buscaProds" class="form-control form-control-lg" type="text" placeholder="Escriba el nombre / codigo" aria-label=".form-control-lg example"> --}}
-                <button  class="form-control form-control-lg btn btn-primary">Finalizar</button>
+                <a href="{{route('citas.finalizar',$cita->id)}}"  class="form-control form-control-lg btn btn-primary">Finalizar</a>
             </div>
         </div>
         &nbsp;
@@ -352,7 +356,7 @@
             <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLongTitle">Agregar diagnostico presuntivo</h5>
+                  <h5 class="modal-title" id="exampleModalLongTitle">Agregar diagnostico definitivo</h5>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -362,7 +366,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             {{-- {{ Form::label('tipo') }} --}}
-                            <input type="hidden" name="tipo" class="form-control" id="tipo" value="presuntivo">
+                            <input type="hidden" name="tipo" class="form-control" id="tipo" value="definitivo">
                         </div>
                         <div class="form-group">
                             {{ Form::label('diagnostico') }}
@@ -383,6 +387,80 @@
                     <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                     <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+          </div>
+          {{-- modal de recetas  --}}
+          <div class="modal fade" id="modalReceta" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLongTitle">Agregar receta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form method="POST" action="{{ route('recetas.store') }}"  role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    {{ Form::label('medicamento') }}
+                                    <input type="text" name="medicamento" id="medicamento" class="form-control">
+
+                                    {{-- {{ Form::text('medicamento', $receta->medicamento, ['class' => 'form-control' . ($errors->has('medicamento') ? ' is-invalid' : ''), 'placeholder' => 'Medicamento']) }} --}}
+                                    {{-- {!! $errors->first('medicamento', '<div class="invalid-feedback">:message</div>') !!} --}}
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    {{ Form::label('dosis') }}
+                                    {{-- {{ Form::text('dodis', $receta->dodis, ['class' => 'form-control' . ($errors->has('dodis') ? ' is-invalid' : ''), 'placeholder' => 'Dodis']) }} --}}
+                                    {{-- {!! $errors->first('dodis', '<div class="invalid-feedback">:message</div>') !!} --}}
+                                    <input type="text" name="dodis" id="dodis" class="form-control">
+
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    {{ Form::label('duracion') }}
+                                    <input type="text" name="duracion" id="duracion" class="form-control">
+
+                                    {{-- {{ Form::text('duracion', $receta->duracion, ['class' => 'form-control' . ($errors->has('duracion') ? ' is-invalid' : ''), 'placeholder' => 'Duracion']) }} --}}
+                                    {{-- {!! $errors->first('duracion', '<div class="invalid-feedback">:message</div>') !!} --}}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            {{ Form::label('instrucciones') }}
+                        <textarea name="instrucciones" id="instrucciones" cols="30" rows="5" class="form-control"></textarea>
+
+                            {{-- {{ Form::text('instrucciones', $receta->instrucciones, ['class' => 'form-control' . ($errors->has('instrucciones') ? ' is-invalid' : ''), 'placeholder' => 'Instrucciones']) }} --}}
+                            {{-- {!! $errors->first('instrucciones', '<div class="invalid-feedback">:message</div>') !!} --}}
+                        </div>
+                        <div class="form-group">
+                            {{ Form::label('notas') }}
+                            <input type="text" name="notas" id="notas" class="form-control">
+
+                            {{-- {{ Form::text('notas', $receta->notas, ['class' => 'form-control' . ($errors->has('notas') ? ' is-invalid' : ''), 'placeholder' => 'Notas']) }} --}}
+                            {{-- {!! $errors->first('notas', '<div class="invalid-feedback">:message</div>') !!} --}}
+                        </div>
+                        {{-- <div class="form-group">
+                            {{ Form::label('id_cita') }}
+                            {{ Form::text('id_cita', $receta->id_cita, ['class' => 'form-control' . ($errors->has('id_cita') ? ' is-invalid' : ''), 'placeholder' => 'Id Cita']) }}
+                            {!! $errors->first('id_cita', '<div class="invalid-feedback">:message</div>') !!}
+                        </div> --}}
+                        <input type="hidden" name="id_cita" value="{{$cita->id}}">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
               </div>
@@ -415,6 +493,6 @@
                 }
             });
         }
-       
+
     </script>
     @stop

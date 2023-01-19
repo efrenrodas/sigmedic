@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cita;
 use App\Models\Receta;
+
 use Illuminate\Http\Request;
+use PDF;
 
 /**
  * Class RecetaController
@@ -47,8 +50,10 @@ class RecetaController extends Controller
 
         $receta = Receta::create($request->all());
 
-        return redirect()->route('recetas.index')
-            ->with('success', 'Receta created successfully.');
+        return redirect()->back();
+
+        // return redirect()->route('recetas.index')
+        //     ->with('success', 'Receta created successfully.');
     }
 
     /**
@@ -103,7 +108,23 @@ class RecetaController extends Controller
     {
         $receta = Receta::find($id)->delete();
 
-        return redirect()->route('recetas.index')
-            ->with('success', 'Receta deleted successfully');
+        return redirect()->back();
+        // return redirect()->route('recetas.index')
+        //     ->with('success', 'Receta deleted successfully');
+    }
+    public function imprimir($id)
+    {
+        $recetas=Receta::where('id_cita','=',$id)->get();
+        $cita=Cita::find($id);
+       // return response()->json($cita);
+        $pdf=PDF::loadView('pdf.receta',compact('recetas','cita'));
+        $pdf->set_option('margin-left', 1);
+        $pdf->set_option('margin-right', 1);
+        $pdf->set_option('margin-top', 1);
+        $pdf->set_option('margin-bottom', 1);
+        $pdf->setPaper('A3', 'portrait');
+        return $pdf->download($id.'receta.pdf');
+    #  return view('pdf.receta',compact('recetas','cita'));
+      //
     }
 }

@@ -229,8 +229,10 @@
 <script>
     var idMedico='0';
     var idUser="{{Auth::id()}}";
+    var idEspecialidad;
     function traeMedicos(idEsp) {
         console.log(idEsp);
+        idEspecialidad=idEsp;
        let route="{{route('medesp.med')}}";
         $.ajax({
             type:'GET',
@@ -351,7 +353,7 @@
       })
     }
     function agendar(id) {
-      
+
         let route="{{route('cita.crear')}}";
        $.ajax({
         type:'GET',
@@ -359,7 +361,8 @@
         data:{
             'id':id,
             'paciente':idUser,
-            'medico':idMedico
+            'medico':idMedico,
+            'especialidad':idEspecialidad,
         },
         success:function(response){
            console.log(response);

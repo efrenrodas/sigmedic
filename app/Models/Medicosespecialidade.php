@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Medicosespecialidade extends Model
 {
-    
+
     static $rules = [
 		'id_medido' => 'required',
 		'id_especialidad' => 'required',
@@ -46,7 +46,7 @@ class Medicosespecialidade extends Model
     {
         return $this->hasOne('App\Models\Especialidade', 'id', 'id_especialidad');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
@@ -54,6 +54,7 @@ class Medicosespecialidade extends Model
     {
         return $this->hasOne('App\Models\User', 'id', 'id_medido');
     }
-    
+
+
 
 }
