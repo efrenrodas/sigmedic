@@ -25,8 +25,20 @@
                             {{ $receta->medicamento }}
                         </div>
                         <div class="form-group">
-                            <strong>Descripcion:</strong>
-                            {{ $receta->descripcion }}
+                            <strong>Dodis:</strong>
+                            {{ $receta->dodis }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Duracion:</strong>
+                            {{ $receta->duracion }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Instrucciones:</strong>
+                            {{ $receta->instrucciones }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Notas:</strong>
+                            {{ $receta->notas }}
                         </div>
                         <div class="form-group">
                             <strong>Id Cita:</strong>

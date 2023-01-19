@@ -16,7 +16,10 @@ return new class extends Migration
         Schema::create('recetas', function (Blueprint $table) {
             $table->id();
             $table->string('medicamento');
-            $table->text('descripcion')->nullable();
+            $table->string('dodis');
+            $table->string('duracion')->nullable();
+            $table->text('instrucciones')->nullable();
+            $table->string('notas')->nullable();
             $table->foreignId('id_cita')->references('id')->on('citas');
             $table->timestamps();
         });

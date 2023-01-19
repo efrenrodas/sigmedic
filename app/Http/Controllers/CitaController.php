@@ -232,5 +232,18 @@ class CitaController extends Controller
         $pdf=Pdf::loadView('pdf.agenda');
        return $pdf->download('cita.pdf');
     }
+    public function ir($id)
+    {
+        $cita = Cita::find($id);
+        $userenfermedades=Userenfermedade::where('id_paciente','=',$cita->paciente->id)
+        ->paginate();
+        $sintomas=Sintoma::where('id_paciente','=',$cita->paciente->id)->where('id_cita','=',$id)->paginate();
+        $examenes=Examene::where('id_cita','=',$id)->get();
+        $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','presuntivo')->get();
+        $recetas=Receta::where('id_cita','=',$id)->get();
+        return view('cita.consulta', compact('cita','userenfermedades','sintomas','examenes','diagnosticos','recetas'));
+
+       #return response()->json($id);
+    }
 
 }

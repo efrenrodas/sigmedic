@@ -14,9 +14,9 @@
                         <div class="float-left">
                             <span class="card-title">Atención medica</span>
                         </div>
-                        <div class="float-right">
+                        {{-- <div class="float-right">
                             <a class="btn btn-primary" href="{{ route('medico.citas') }}"> Atras</a>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="card-body">
@@ -48,141 +48,17 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Enfermedades') }}
-                            </span>
-
-                             <div class="float-right">
-                                <button onclick="abrir('modalEnfermedades')" class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
-
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-
-                                        <th>Nombre</th>
-                                        <th>Medicamento</th>
-                                        {{-- <th>Id Paciente</th> --}}
-
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($userenfermedades as $userenfermedade)
-                                        <tr>
-                                            <td>{{ $loop->iteration}}</td>
-
-                                            <td>{{ $userenfermedade->nombre }}</td>
-                                            <td>{{ $userenfermedade->medicamento }}</td>
-                                            {{-- <td>{{ $userenfermedade->id_paciente }}</td> --}}
-
-                                            <td>
-                                                <form action="{{ route('userenfermedades.destroy',$userenfermedade->id) }}" method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('userenfermedades.show',$userenfermedade->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
-                                                    {{-- <a class="btn btn-sm btn-success" href="{{ route('userenfermedades.edit',$userenfermedade->id) }}"><i class="fa fa-fw fa-edit"></i></a> --}}
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Sintomas') }}
-                            </span>
-
-                             <div class="float-right">
-                                <button onclick="abrir('modalSintomas')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
-
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-success">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-
-										<th>Nombre</th>
-										<th>Descripcion</th>
-										{{-- <th>Id Paciente</th> --}}
-
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($sintomas as $sintoma)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-
-											<td>{{ $sintoma->nombre }}</td>
-											<td>{{ $sintoma->descripcion }}</td>
-											{{-- <td>{{ $sintoma->id_paciente }}</td> --}}
-
-                                            <td>
-                                                <form action="{{ route('sintomas.destroy',$sintoma->id) }}" method="POST">
-                                                    {{-- <a class="btn btn-sm btn-primary " href="{{ route('sintomas.show',$sintoma->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
-                                                    {{-- <a class="btn btn-sm btn-success" onclick="traeSintoma('{{$sintoma->id}}')" ><i class="fa fa-fw fa-edit"></i></a> --}}
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    
         {{-- examenes --}}
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Examenes solicitados</span>
+                            <span class="card-title">Examenes</span>
                         </div>
                         <div class="float-right">
-                            <button onclick="abrir('modalExamenes')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                            {{-- <button onclick="abrir('modalExamenes')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button> --}}
 
                         </div>
                     </div>
@@ -212,11 +88,11 @@
 
                                                 <td>
                                                     <form action="{{ route('examenes.destroy',$examene->id) }}" method="POST">
-                                                        {{-- <a class="btn btn-sm btn-primary " href="{{ route('examenes.show',$examene->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
+                                                        <a class="btn btn-sm btn-primary " href="{{ route('examenes.show',$examene->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
                                                         {{-- <a class="btn btn-sm btn-success" href="{{ route('examenes.edit',$examene->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a> --}}
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+                                                        {{-- <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button> --}}
                                                     </form>
                                                 </td>
                                             </tr>
@@ -233,7 +109,7 @@
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
-                            <span class="card-title">Diagnostico presuntivo</span>
+                            <span class="card-title">Diagnostico Definitivo</span>
                         </div>
                         <div class="float-right">
                             <button onclick="abrir('modalDiagnostico')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
@@ -284,12 +160,74 @@
                     </div>
                 </div>
             </div>
+            {{-- receta --}}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <span class="card-title">Receta</span>
+                        </div>
+                        <div class="float-right">
+                            <button onclick="abrir('modalDiagnostico')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
+                                    <tr>
+                                        <th>No</th>
+                                        
+										<th>Medicamento</th>
+										<th>Dodis</th>
+										<th>Duracion</th>
+										<th>Instrucciones</th>
+										<th>Notas</th>
+										{{-- <th>Id Cita</th> --}}
+
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($recetas as $receta)
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            
+											<td>{{ $receta->medicamento }}</td>
+											<td>{{ $receta->dodis }}</td>
+											<td>{{ $receta->duracion }}</td>
+											<td>{{ $receta->instrucciones }}</td>
+											<td>{{ $receta->notas }}</td>
+											{{-- <td>{{ $receta->id_cita }}</td> --}}
+
+                                            <td>
+                                                <form action="{{ route('recetas.destroy',$receta->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('recetas.show',$receta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('recetas.edit',$receta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Delete</button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-6">
                 {{-- <input id="buscaProds" class="form-control form-control-lg" type="text" placeholder="Escriba el nombre / codigo" aria-label=".form-control-lg example"> --}}
-            <button  class="form-control form-control-lg btn btn-primary">Siguiente</button>
+                <button  class="form-control form-control-lg btn btn-warning">Atras</button>
+            </div>
+            <div class="col-md-6">
+                {{-- <input id="buscaProds" class="form-control form-control-lg" type="text" placeholder="Escriba el nombre / codigo" aria-label=".form-control-lg example"> --}}
+                <button  class="form-control form-control-lg btn btn-primary">Finalizar</button>
             </div>
         </div>
         &nbsp;
@@ -477,5 +415,6 @@
                 }
             });
         }
+       
     </script>
     @stop

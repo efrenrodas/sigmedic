@@ -37,7 +37,10 @@
                                         <th>No</th>
                                         
 										<th>Medicamento</th>
-										<th>Descripcion</th>
+										<th>Dodis</th>
+										<th>Duracion</th>
+										<th>Instrucciones</th>
+										<th>Notas</th>
 										<th>Id Cita</th>
 
                                         <th></th>
@@ -49,7 +52,10 @@
                                             <td>{{ ++$i }}</td>
                                             
 											<td>{{ $receta->medicamento }}</td>
-											<td>{{ $receta->descripcion }}</td>
+											<td>{{ $receta->dodis }}</td>
+											<td>{{ $receta->duracion }}</td>
+											<td>{{ $receta->instrucciones }}</td>
+											<td>{{ $receta->notas }}</td>
 											<td>{{ $receta->id_cita }}</td>
 
                                             <td>

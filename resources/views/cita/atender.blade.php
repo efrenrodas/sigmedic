@@ -289,7 +289,7 @@
         <div class="row">
             <div class="col-md-12">
                 {{-- <input id="buscaProds" class="form-control form-control-lg" type="text" placeholder="Escriba el nombre / codigo" aria-label=".form-control-lg example"> --}}
-            <button  class="form-control form-control-lg btn btn-primary">Siguiente</button>
+            <button onclick="ir('{{$cita->id}}')" class="form-control form-control-lg btn btn-primary">Siguiente</button>
             </div>
         </div>
         &nbsp;
@@ -476,6 +476,10 @@
                     console.log(response);
                 }
             });
+        }
+        function ir(id){
+            console.log(id);
+            window.location.href = '/ir/'+id;
         }
     </script>
     @stop

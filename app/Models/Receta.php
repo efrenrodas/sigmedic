@@ -9,7 +9,10 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property $id
  * @property $medicamento
- * @property $descripcion
+ * @property $dodis
+ * @property $duracion
+ * @property $instrucciones
+ * @property $notas
  * @property $id_cita
  * @property $created_at
  * @property $updated_at
@@ -23,6 +26,7 @@ class Receta extends Model
     
     static $rules = [
 		'medicamento' => 'required',
+		'dodis' => 'required',
 		'id_cita' => 'required',
     ];
 
@@ -33,7 +37,7 @@ class Receta extends Model
      *
      * @var array
      */
-    protected $fillable = ['medicamento','descripcion','id_cita'];
+    protected $fillable = ['medicamento','dodis','duracion','instrucciones','notas','id_cita'];
 
 
     /**

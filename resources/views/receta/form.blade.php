@@ -7,9 +7,24 @@
             {!! $errors->first('medicamento', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('descripcion') }}
-            {{ Form::text('descripcion', $receta->descripcion, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Descripcion']) }}
-            {!! $errors->first('descripcion', '<div class="invalid-feedback">:message</div>') !!}
+            {{ Form::label('dodis') }}
+            {{ Form::text('dodis', $receta->dodis, ['class' => 'form-control' . ($errors->has('dodis') ? ' is-invalid' : ''), 'placeholder' => 'Dodis']) }}
+            {!! $errors->first('dodis', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('duracion') }}
+            {{ Form::text('duracion', $receta->duracion, ['class' => 'form-control' . ($errors->has('duracion') ? ' is-invalid' : ''), 'placeholder' => 'Duracion']) }}
+            {!! $errors->first('duracion', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('instrucciones') }}
+            {{ Form::text('instrucciones', $receta->instrucciones, ['class' => 'form-control' . ($errors->has('instrucciones') ? ' is-invalid' : ''), 'placeholder' => 'Instrucciones']) }}
+            {!! $errors->first('instrucciones', '<div class="invalid-feedback">:message</div>') !!}
+        </div>
+        <div class="form-group">
+            {{ Form::label('notas') }}
+            {{ Form::text('notas', $receta->notas, ['class' => 'form-control' . ($errors->has('notas') ? ' is-invalid' : ''), 'placeholder' => 'Notas']) }}
+            {!! $errors->first('notas', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('id_cita') }}

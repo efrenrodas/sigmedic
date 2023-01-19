@@ -105,7 +105,8 @@ Route::resource('recetas',RecetaController::class);
 
 Route::get('consulta/{id}',[CitaController::class,'consulta'])->name('consulta.atender');
 
+#atencion parte 2
+Route::get('ir/{id}',[CitaController::class,'ir'])->name('cita.ir');
 
 #pdf
-
 Route::get('/verpdf',[CitaController::class,'cita']);
