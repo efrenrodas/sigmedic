@@ -126,3 +126,10 @@ Route::get('repcitasesp',[ReportesController::class,'citasesp'])->name('reporte.
 Route::get('repcitasmed',[ReportesController::class,'dameMedicos'])->name('reporte.citas.medico');
 #citas por mes
 Route::get('repcitasmes',[ReportesController::class,'dameCitas'])->name('reporte.citas.mes');
+
+#pdf para reporte de citas por especialidad
+Route::get('pdfcitasesp',[ReportesController::class,'citaspdf'])->name('reporte.pfd.citas.especialidad');
+#pdf para reporte de medicos con citas
+Route::get('medicitaspdf',[ReportesController::class,'medicitaspdf'])->name('reporte.pfd.citas.especialidad');
+#pdf de reporte de citas por mes
+Route::get('citasmes',[ReportesController::class,'citasmes'])->name('reporte.pfd.citas.mes');

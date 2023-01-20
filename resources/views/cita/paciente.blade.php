@@ -36,7 +36,7 @@
                             <thead class="thead">
                                 <tr>
                                     <th>No</th>
-                                    
+
                                     <th>Horario</th>
                                    {{-- <th> Paciente</th> --}}
                                     <th> Medico</th>
@@ -49,7 +49,7 @@
                                 @foreach ($citas as $cita)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-                                        
+
                                         <td>{{ $cita->horario }}</td>
                                         {{-- <td>{{ $cita->id_paciente }}</td> --}}
                                         <td>{{ $cita->medico->name }}</td>
@@ -57,11 +57,18 @@
 
                                         <td>
                                             <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{ route('citas.show',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a>
+                                                {{-- <a class="btn btn-sm btn-primary " href="{{ route('citas.show',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a> --}}
                                                 {{-- <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Reagendar</a> --}}
                                                 @csrf
                                                 @method('DELETE')
+                                                @if ($cita->estado=='1')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Cancelar</button>
+
+                                                @else
+                                                <i class="fa fa-id-card" aria-hidden="true"></i>
+
+
+                                                @endif
                                             </form>
                                         </td>
                                     </tr>

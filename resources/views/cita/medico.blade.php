@@ -4,6 +4,7 @@
 
 @section('content_header')
     <h1>Mi agenda</h1>
+
 @stop
 @section('content')
     <div class="container-fluid">
@@ -17,11 +18,12 @@
                                 {{ __('Citas agendadas') }}
                             </span>
 
-                             {{-- <div class="float-right">
-                                <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                             <div class="float-right">
+                                {{-- <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
-                                </a>
-                              </div> --}}
+                                </a> --}}
+                                {{date('Y-m-d H:i:s')}}
+                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -74,7 +76,12 @@
 
                                             <td>
                                                 <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">
+                                                    @if (date('Y-m-d H:i:s') <= $cita->updated_at)
                                                     <a class="btn btn-sm btn-primary " href="{{ route('citas.atender',$cita->id) }}"><i class="fa fa-chevron-right"></i> Atender</a>
+                                                    @else
+                                                    <a class="btn btn-sm btn-primary disabled " href="{{ route('citas.atender',$cita->id) }}"><i class="fa fa-chevron-right"></i> Atender</a>
+
+                                                    @endif
                                                     {{-- <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a> --}}
                                                     @csrf
                                                     @method('DELETE')

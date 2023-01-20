@@ -13,7 +13,7 @@
   <meta name="author" content="" />
   <link rel="shortcut icon" href="{{asset('template/images/favicon.png')}}" type="">
 
-  <title> Orthoc </title>
+  <title> Sigmed </title>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="{{asset('template/css/bootstrap.css')}}" />
@@ -35,7 +35,7 @@
 </head>
 
 <body>
-   
+
   <div class="hero_area">
 
     <div class="hero_bg_box">
@@ -70,8 +70,8 @@
               <li class="nav-item">
                 <a class="nav-link" href="#doctors">Medicos</a>
               </li>
-             
-              
+
+
               @if (Route::has('login'))
                 @auth
                 <li class="nav-item">
@@ -428,7 +428,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          
+
            <div class="form_container contact-form">
             <form method="POST" action="{{ route('register') }}">
                 @csrf
@@ -449,7 +449,7 @@
                 <div class="col-lg-4">
                     <div>
                         <label for="name" class="col-form-label text-md-end">{{ __('Nombres') }}</label>
-  
+
                         <input id="name" placeholder="Nombres" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"  >
 
                         @error('name')
@@ -463,7 +463,7 @@
                     <div>
                         <label for="apellidos" class="col-md-4 col-form-label text-md-end">{{ __('Apellidos') }}</label>
 
-                        
+
                             <input id="apellidos" placeholder="Apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos"  >
 
                             @error('apellidos')
@@ -471,7 +471,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                        
+
                     </div>
                 </div>
 
@@ -481,7 +481,7 @@
                         <div>
                             <label for="fechaNaciemiento" class="col-form-label text-md-end">{{ __('Fecha de Nacimiento') }}</label>
 
-                        
+
                                 <input id="fechaNaciemiento" type="date" class="form-control @error('fechaNaciemiento') is-invalid @enderror" name="fechaNaciemiento" value="{{ old('fechaNaciemiento') }}" required autocomplete="fechaNaciemiento"  >
 
                                 @error('fechaNaciemiento')
@@ -489,29 +489,29 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label for="genero" class="col-md-4 col-form-label text-md-end">{{ __('Genero') }}</label>
 
-                            
+
                                     {{-- <input id="fechaNacimiento" type="date" class="form-control @error('fechaNacimiento') is-invalid @enderror" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" required autocomplete="fechaNacimiento"  > --}}
                                     <select class="form-control" name="genero" id="genero">
                                         @foreach ($generos as $genero)
                                         <option value="{{$genero->id}}">{{$genero->nombre}}</option>
-                                        
+
                                         @endforeach
                                     </select>
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label for="ciudadResidencia" class="col-form-label text-md-end">{{ __('Ciudad de residencia') }}</label>
 
-                        
+
                                     <input id="ciudadResidencia" placeholder="Ciudad" type="text" class="form-control @error('ciudadResidencia') is-invalid @enderror" name="ciudadResidencia" value="{{ old('ciudadResidencia') }}" required autocomplete="ciudadResidencia"  >
 
                                     @error('ciudadResidencia')
@@ -519,7 +519,7 @@
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
-                                
+
                         </div>
                     </div>
 
@@ -529,7 +529,7 @@
                         <div>
                             <label for="email" class="col-form-label text-md-end">{{ __('Email') }}</label>
 
-                            
+
                                 <input id="email" placeholder="mail@mail.com" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
@@ -537,14 +537,14 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 
-                           
+
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
 
                                 @error('password')
@@ -552,22 +552,22 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            
+
                         </div>
                     </div>
                     <div class="col-lg-4">
                         <div>
                             <label for="password-confirm" class="col-form-label text-md-end">{{ __('Confirm Password') }}</label>
 
-                           
+
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                            
+
                         </div>
                     </div>
 
               </div>
-              
-             
+
+
               <div class="btn_box">
                 <button type="submit">
                   REGISTRO
@@ -576,8 +576,8 @@
             </form>
           </div>
           @endauth
-          
-          
+
+
         </div>
         {{-- <div class="col-md-6">
           <div class="map_container">
@@ -783,8 +783,8 @@
             &copy; <span id="displayYear"></span> Distributed By
             <a href="https://themewagon.com/">ThemeWagon</a>
         </p>
-       
-      </div>  
+
+      </div>
     </div>
   </footer>
   <!-- footer section -->

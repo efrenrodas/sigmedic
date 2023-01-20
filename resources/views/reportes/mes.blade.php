@@ -14,9 +14,9 @@
                         <div class="float-left">
                             <span class="card-title">Cantidad de citas por mes</span>
                         </div>
-                        {{-- <div class="float-right">
-                            <a class="btn btn-primary" href="{{ route('recetas.index') }}"> Back</a>
-                        </div> --}}
+                        <div class="float-right">
+                            <a class="btn btn-danger" href="{{ route('reporte.pfd.citas.mes') }}"> PDF</a>
+                        </div>
                     </div>
 
                     <div class="card-body">
@@ -35,7 +35,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                               
+
                                 @foreach ($citasMeses as $citas)
                                     <tr>
                                         <td>{{ $citas['mes'] }}</td>
@@ -46,7 +46,7 @@
                                         <td>{{ $citas['cancelado'] }}</td>
                                         <td>{{ $citas['finalizada'] }}</td>
                                         <td>{{ $citas['total'] }}</td>
-                                       
+
 
                                     </tr>
                                 @endforeach

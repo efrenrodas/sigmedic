@@ -1,22 +1,28 @@
-@extends('adminlte::page')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
 
-@section('title', 'Dashboard')
+</head>
+<body>
 
-@section('content_header')
-    <h1>Reporte</h1>
-@stop
-@section('content')
+
     <section class="content container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
                         <div class="float-left">
                             <span class="card-title">Cantidad de citas por especialidad</span>
                         </div>
-                        <div class="float-right">
-                            <a class="btn btn-danger" href="{{ route('reporte.pfd.citas.especialidad') }}"> PDF</a>
-                        </div>
+                        {{-- <div class="float-right">
+                            <a class="btn btn-primary" href="{{ route('recetas.index') }}"> Back</a>
+                        </div> --}}
                     </div>
 
                     <div class="card-body">
@@ -66,12 +72,6 @@
             </div>
         </div>
     </section>
-    @stop
 
-    @section('css')
-
-    @stop
-
-    @section('js')
-
-    @stop
+</body>
+</html>

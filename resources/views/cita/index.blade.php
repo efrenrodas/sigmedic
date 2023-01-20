@@ -399,14 +399,15 @@
             }
     }
   function llenaCitas(citas) {
-
+    const currentTime = new Date().toISOString();
     $('#events').empty();
 
     $.each(citas,function(index,value){
       //  console.log(value.id);
       //let horario = value.horario;
+      if (currentTime <= value.horario) {
       $(`#events`).append(`<div class="event-item"> ${value.horario} <a onclick="agendar('${value.id}')" class="btn btn-outline-success">agendar</a></div>`);
-
+      }
     })
 
   }
