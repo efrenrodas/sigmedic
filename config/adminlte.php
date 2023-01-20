@@ -349,7 +349,7 @@ return [
             [
                 'text'    => 'Configuración',
                 'icon'    => 'fas fa-fw fa-lock',
-                'can'=>'desarrollar',
+               // 'can'=>'desarrollar',
                 'submenu' => [
                     [
                         'text' => 'Géneros',
@@ -381,9 +381,9 @@ return [
                 'route'        => 'citas.create',
             ],
             [
-                'text'       => 'information',
+                'text'       => 'Citas',
                 'icon_color' => 'cyan',
-                'url'        => '#',
+                'route'        => 'citas.index',
             ],
         ],
         ],

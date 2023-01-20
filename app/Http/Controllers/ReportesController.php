@@ -250,4 +250,19 @@ class ReportesController extends Controller
         // return view('cita.paciente', compact('citas'))
         //     ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
+    public function imprimeCita($id)
+    {
+       $cita=Cita::find($id);
+    #   return response()->json($cita);
+       $pdf=PDF::loadView('pdf.cita',compact('cita'));
+       $pdf->set_option('margin-left', 0);
+       $pdf->set_option('margin-right', 0);
+       $pdf->set_option('margin-top', 0);
+       $pdf->set_option('margin-bottom', 0);
+      #  $pdf->setPaper(array(0,0,180,150));
+      $pdf->setPaper(array(0, 0, 150, 150), 'mm');
+
+
+        return $pdf->stream('citas_meses.pdf');
+    }
 }

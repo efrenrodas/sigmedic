@@ -6,6 +6,7 @@ use App\Models\Cita;
 use App\Models\Diagnostico;
 use App\Models\Especialidade;
 use App\Models\Examene;
+use App\Models\Genero;
 use App\Models\Medicosespecialidade;
 use App\Models\Receta;
 use App\Models\Sintoma;
@@ -30,7 +31,8 @@ class CitaController extends Controller
     {
         $citas = Cita::paginate();
         $especialidades=Especialidade::where('estado','=','1')->get();
-        return view('cita.index', compact('citas','especialidades'))
+        $generos=Genero::all();
+        return view('cita.index', compact('citas','especialidades','generos'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
     }
 

@@ -182,4 +182,35 @@ class UserController extends Controller
         }
         return redirect()->back();
     }
+    public function buscar(Request $request)
+    {
+       $cedula=$request['cedula'];
+       $user=User::where('identificacion','=',$cedula)->first();
+       return response()->json($user);
+    }
+    public function registra(Request $request)
+    {
+        //request()->validate(User::$rules);
+
+        $rol=$request['rol'];
+        $password=$request['identificacion'];
+        $request['password']=Hash::make($password);
+     //   return response()->json($request);
+        $user = User::create($request->all());
+        $user->assignRole($rol);
+       switch ($rol) {
+        case 'medico':
+           ## $this->dameMedicos();
+           return redirect()->back();
+            break;
+        case 'paciente':
+           ## $this->damePacientes();
+           return redirect()->back();
+            break;
+
+        default:
+            # code...
+            break;
+       }
+    }
 }

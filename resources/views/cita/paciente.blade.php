@@ -53,19 +53,34 @@
                                         <td>{{ $cita->horario }}</td>
                                         {{-- <td>{{ $cita->id_paciente }}</td> --}}
                                         <td>{{ $cita->medico->name }}</td>
-                                        <td>{{ $cita->estado==1?'Agendada':'Cancelada' }}</td>
+                                        <td> @switch($cita->estado)
+                                            @case(1)
+                                                Agendada
+                                                @break
+                                            @case(2)
+                                                En proceso
+                                                @break
+                                            @case(3)
+                                                Cancelada
+                                                @break
+                                                @case(4)
+                                                Finalizada
+                                                @break
+                                            @default
+
+                                        @endswitch</td>
 
                                         <td>
                                             <form action="{{ route('citas.destroy',$cita->id) }}" method="POST">
-                                                {{-- <a class="btn btn-sm btn-primary " href="{{ route('citas.show',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Ver</a> --}}
+                                                <a class="btn btn-sm btn-primary " target="_blank" href="{{ route('cita.imprimir',$cita->id) }}"><i class="fa fa-fw fa-eye"></i> Imprimir</a>
                                                 {{-- <a class="btn btn-sm btn-success" href="{{ route('citas.edit',$cita->id) }}"><i class="fa fa-fw fa-edit"></i> Reagendar</a> --}}
                                                 @csrf
                                                 @method('DELETE')
                                                 @if ($cita->estado=='1')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> Cancelar</button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-print"></i> Cancelar</button>
 
                                                 @else
-                                                <i class="fa fa-id-card" aria-hidden="true"></i>
+                                                {{-- <i class="fa fa-id-card" aria-hidden="true"></i> --}}
 
 
                                                 @endif

@@ -133,3 +133,11 @@ Route::get('pdfcitasesp',[ReportesController::class,'citaspdf'])->name('reporte.
 Route::get('medicitaspdf',[ReportesController::class,'medicitaspdf'])->name('reporte.pfd.citas.especialidad');
 #pdf de reporte de citas por mes
 Route::get('citasmes',[ReportesController::class,'citasmes'])->name('reporte.pfd.citas.mes');
+#route::get 
+Route::get('buscaUser',[UserController::class,'buscar'])->name('user.buscar');
+
+Route::post('registrausuario',[UserController::class,'registra'])->name('usuario.guardar');
+
+#imprimir una cita
+
+Route::get('imprimecita/{id}',[ReportesController::class,'imprimeCita'])->name('cita.imprimir');
