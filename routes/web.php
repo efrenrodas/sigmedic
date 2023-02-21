@@ -53,7 +53,7 @@ route::get('dameUsuarios',[UserController::class,'damePacientes'])->name('dame.p
 
 route::get('dameMedicos',[UserController::class,'dameMedicos'])->name('dame.medicos');
 
-Route::resource('medicos',MedicoController::class);
+//Route::resource('medicos',MedicoController::class);
 
 Route::resource('users',UserController::class);
 

@@ -14,29 +14,9 @@ use PDF;
  */
 class RecetaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $recetas = Receta::paginate();
+    
 
-        return view('receta.index', compact('recetas'))
-            ->with('i', (request()->input('page', 1) - 1) * $recetas->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $receta = new Receta();
-        return view('receta.create', compact('receta'));
-    }
+   
 
     /**
      * Store a newly created resource in storage.

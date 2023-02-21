@@ -11,30 +11,9 @@ use Illuminate\Http\Request;
  */
 class ExameneController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        $examenes = Examene::paginate();
+    
 
-        return view('examene.index', compact('examenes'))
-            ->with('i', (request()->input('page', 1) - 1) * $examenes->perPage());
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        $examene = new Examene();
-        return view('examene.create', compact('examene'));
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      *
