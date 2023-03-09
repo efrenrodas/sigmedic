@@ -18,11 +18,12 @@
                                 {{ __('Citas agendadas') }}
                             </span>
 
-                             <div class="float-right">
+                             <div id="fechaHora" class="float-right">
                                 {{-- <a href="{{ route('citas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a> --}}
-                                {{date('Y-m-d H:i:s')}}
+
+
                               </div>
                         </div>
                     </div>
@@ -106,5 +107,22 @@
     @stop
 
     @section('js')
+    <script>
 
+function escribeFecha() {
+  let fechaHoraActual = new Date();
+  let dia = fechaHoraActual.getDate().toString().padStart(2, '0');
+  let mes = (fechaHoraActual.getMonth() + 1).toString().padStart(2, '0');
+  let año = fechaHoraActual.getFullYear().toString();
+  let hora = fechaHoraActual.getHours().toString().padStart(2, '0');
+  let minutos = fechaHoraActual.getMinutes().toString().padStart(2, '0');
+  let segundos = fechaHoraActual.getSeconds().toString().padStart(2, '0');
+
+  let fechaHoraFormateada = `${dia}/${mes}/${año} ${hora}:${minutos}:${segundos}`;
+
+  $('#fechaHora').text(fechaHoraFormateada);
+}
+
+setInterval(escribeFecha, 1000);
+    </script>
     @stop
