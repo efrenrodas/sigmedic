@@ -110,7 +110,7 @@
                       Realiza todo el proceso, completamente en linea.
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="#identif" class="btn1">
                         Registrarse
                       </a>
                     </div>
@@ -131,7 +131,7 @@
                         Accede para agendar en linea
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
+                      <a href="#identif" class="btn1">
                         Acceder
                       </a>
                     </div>
@@ -152,8 +152,8 @@
                         Personal altamente calificado, para que tu seguridad sea nuestra prioridad
                     </p>
                     <div class="btn-box">
-                      <a href="" class="btn1">
-                        Read More
+                      <a href="#identif" class="btn1">
+                        Acceder
                       </a>
                     </div>
                   </div>
@@ -421,13 +421,13 @@
           </a>
         </div>
          @else
-      <div class="heading_container">
+      <div id="identif" class="heading_container">
         <h2>
           Registrate
         </h2>
       </div>
       <div class="row">
-        <div class="col-md-12">
+        <div  class="col-md-12">
 
            <div class="form_container contact-form">
             <form method="POST" action="{{ route('register') }}">

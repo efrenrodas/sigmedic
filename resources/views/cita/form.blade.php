@@ -13,12 +13,17 @@
 
         <div class="form-group">
             {{ Form::label('fecha inicial') }}
-            {{ Form::date('desde', $cita->horario, ['class' => 'form-control' . ($errors->has('horario') ? ' is-invalid' : ''), 'placeholder' => 'Horario']) }}
+            {{-- {{ Form::datetime('desde', $cita->horario, ['class' => 'form-control' . ($errors->has('horario') ? ' is-invalid' : ''), 'placeholder' => 'Horario']) }} --}}
+            {{-- {{ Form::input('dateTime-local', 'desde', $cita->horario, array('class' => 'form-control')) }} --}}
+            {{ Form::input('datetime-local', 'desde', $cita->horario, array('class' => 'form-control', 'step' => '3600')) }}
+
+
             {!! $errors->first('horario', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
             {{ Form::label('fecha final') }}
-            {{ Form::date('hasta', $cita->horario, ['class' => 'form-control' . ($errors->has('horario') ? ' is-invalid' : ''), 'placeholder' => 'Horario']) }}
+            {{-- {{ Form::datetime('hasta', $cita->horario, ['class' => 'form-control' . ($errors->has('horario') ? ' is-invalid' : ''), 'placeholder' => 'Horario']) }} --}}
+            {{ Form::input('dateTime-local', 'hasta', $cita->horario, array('class' => 'form-control')) }}
             {!! $errors->first('horario', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         {{-- <div class="form-group">

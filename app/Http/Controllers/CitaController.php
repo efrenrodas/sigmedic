@@ -72,16 +72,33 @@ class CitaController extends Controller
             if ($day == 0 || $day == 6 || $hour < 8 || $hour > 18 ) {
                 continue;
             }
-            $cita=new Cita();
-            $cita->horario=date('Y-m-d H:i:s', $i);
-            $cita->id_medico=$medico;
-            $cita->estado='0';
-            $cita->save();
+            $fechaHora=date('Y-m-d H:i:s', $i);
+            $citaExistente = Cita::where('horario', $fechaHora)
+                      ->where('id_medico', $medico)
+                      ->first();
+
+            // $cita=new Cita();
+            // $cita->horario=date('Y-m-d H:i:s', $i);
+            // $cita->id_medico=$medico;
+            // $cita->estado='0';
+            // $cita->save();
+            // Si no hay una cita existente, crear una nueva cita
+                if (!$citaExistente) {
+                    $cita = new Cita();
+                    $cita->horario = $fechaHora;
+                    $cita->id_medico = $medico;
+                    $cita->estado = '0';
+                    $cita->save();
+                } else {
+                    // La cita ya existe, hacer algo aquí (por ejemplo, mostrar un mensaje de error)
+                }
+            
         }
        // request()->validate(Cita::$rules);
 
       //  $cita = Cita::create($request->all());
       $citas=Cita::paginate();
+      return response()->json($request);
       return redirect()->back();
       // return view('cita.inicio',compact('citas'))->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
         // return redirect()->route('citas.index2')
