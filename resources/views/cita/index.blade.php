@@ -14,11 +14,11 @@
                      <div class="card">
                          <div class="card-header">
                              <div style="display: flex; justify-content: space-between; align-items: center;">
-         
+
                                  <span id="card_title">
                                      {{ __('Registrar paciente') }}
                                  </span>
-         
+
                              </div>
                          </div>
                          @if ($message = Session::get('success'))
@@ -26,7 +26,7 @@
                                  <p>{{ $message }}</p>
                              </div>
                          @endif
-         
+
                          <div id="divPacientes" class="card-body">
                             <form method="POST"  action="{{ route('usuario.guardar') }}">
                                 @csrf
@@ -34,9 +34,9 @@
                                     <div class="col-lg-4">
                                     <div>
                                         <label for="identificacion" class="col-form-label text-md-end">{{ __('Identificación') }}</label>
-                    
+
                                         <input id="identificacion" placeholder="numero de cedula / pasaporte" type="text" class="form-control @error('identificacion') is-invalid @enderror" name="identificacion" value="{{ old('identificacion') }}" required autocomplete="identificacion"  >
-                    
+
                                         @error('identificacion')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -47,9 +47,9 @@
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="name" class="col-form-label text-md-end">{{ __('Nombres') }}</label>
-                    
+
                                             <input id="name" placeholder="Nombres" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name"  >
-                    
+
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -60,110 +60,110 @@
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="apellidos" class="col-form-label text-md-end">{{ __('Apellidos') }}</label>
-                    
-                    
+
+
                                                 <input id="apellidos" placeholder="Apellidos" type="text" class="form-control @error('apellidos') is-invalid @enderror" name="apellidos" value="{{ old('apellidos') }}" required autocomplete="apellidos"  >
-                    
+
                                                 @error('apellidos')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                    
+
                                         </div>
                                     </div>
-                
+
                                 </div>
                               <div class="form-row">
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="fechaNaciemiento" class="col-form-label text-md-end">{{ __('Fecha de Nacimiento') }}</label>
-                
-                
+
+
                                                 <input id="fechaNaciemiento" type="date" class="form-control @error('fechaNaciemiento') is-invalid @enderror" name="fechaNaciemiento" value="{{ old('fechaNaciemiento') }}" required autocomplete="fechaNaciemiento"  >
-                
+
                                                 @error('fechaNaciemiento')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                
+
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="genero" class="col-form-label text-md-end">{{ __('Genero') }}</label>
-                
-                
+
+
                                                     {{-- <input id="fechaNacimiento" type="date" class="form-control @error('fechaNacimiento') is-invalid @enderror" name="fechaNacimiento" value="{{ old('fechaNacimiento') }}" required autocomplete="fechaNacimiento"  > --}}
                                                     <select class="form-control" name="genero" id="genero">
                                                         @foreach ($generos as $genero)
                                                         <option value="{{$genero->id}}">{{$genero->nombre}}</option>
-                
+
                                                         @endforeach
                                                     </select>
-                
+
                                         </div>
                                     </div>
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="ciudadResidencia" class="col-form-label text-md-end">{{ __('Ciudad de residencia') }}</label>
-                
-                
+
+
                                                     <input id="ciudadResidencia" placeholder="Ciudad" type="text" class="form-control @error('ciudadResidencia') is-invalid @enderror" name="ciudadResidencia" value="{{ old('ciudadResidencia') }}" required autocomplete="ciudadResidencia"  >
-                
+
                                                     @error('ciudadResidencia')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
-                
+
                                         </div>
                                     </div>
-                
+
                               </div>
                               <div class="form-row">
                                     <div class="col-lg-4">
                                         <div>
                                             <label for="email" class="col-form-label text-md-end">{{ __('Email') }}</label>
-                
-                
+
+
                                                 <input id="email" placeholder="mail@mail.com" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-                
+
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                
+
                                         </div>
                                     </div>
                                     {{-- <div class="col-lg-4">
                                         <div>
                                             <label for="password" class="col-form-label text-md-end">{{ __('Password') }}</label>
-                
-                
+
+
                                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-                
+
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
-                
+
                                         </div>
                                     </div> --}}
                                     {{-- <div class="col-lg-4">
                                         <div>
                                             <label for="password-confirm" class="col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-                
-                
+
+
                                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                
+
                                         </div>
                                     </div> --}}
                                     <input type="hidden" name="rol" value="paciente">
-                
+
                               </div>
                               &nbsp;
                              <div class="row">
@@ -173,9 +173,9 @@
                                 &nbsp;
                                 <a id="btnContinuar" onclick="continuar()" style="display:none"  class='btn btn-primary btn-lg'> Continuar</a>
                              </div>
-                            
-                                
-                              
+
+
+
                             </form>
 
                          </div>
@@ -183,11 +183,11 @@
 
                          </div>
                      </div>
-         
+
                  </div>
-                 </div> 
+                 </div>
              @endcan
-             
+
              {{-- fin de agregar paciente --}}
 
 
@@ -416,9 +416,9 @@
     var idPaciente="0";
     var idEspecialidad;
     var existe=0;
-   
+
     function traeMedicos(idEsp) {
-        
+
         console.log(idEsp);
         idEspecialidad=idEsp;
        if (existe==0) {
@@ -591,7 +591,7 @@
             }
     }
   function llenaCitas(citas) {
-    const currentTime = new Date().toISOString();
+    const currentTime = new Date().toLocaleString().slice(0, 19).replace('T', ' ');
     $('#events').empty();
 
     $.each(citas,function(index,value){
@@ -600,10 +600,11 @@
       if (currentTime <= value.horario) {
       $(`#events`).append(`<div class="event-item"> ${value.horario} <a onclick="agendar('${value.id}')" class="btn btn-outline-success">agendar</a></div>`);
       }
+
     })
 
   }
-  
+
   let route="{{route('user.buscar')}}";
   $('#identificacion').keyup(function name() {
     let cedula=$('#identificacion').val();
@@ -620,7 +621,7 @@
                 console.log('no existe');
                 $("#submitbutton").show();
                 $("#btnContinuar").hide();
-                
+
                 idUser="{{Auth::id()}}";
                 idUser=0;
                 existe=0;
@@ -647,7 +648,7 @@
         alert('No has seleccionado el paciente')
         idUser="{{Auth::id()}}";
        }
-       
+
   }
 
 </script>

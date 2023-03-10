@@ -29,6 +29,15 @@
                             <strong>Paciente:</strong>
                             {{ $cita->paciente->name }} {{ $cita->paciente->apellidos }}
                         </div>
+                        <div class="form-group">
+                            <strong>Edad:</strong>
+                            @php
+                              $fechaNacimiento = \Carbon\Carbon::parse($cita->paciente->fechaNaciemiento);
+                              $edad = $fechaNacimiento->diffInYears(\Carbon\Carbon::now());
+                              echo $edad." años";
+                            @endphp
+                          </div>
+
 
                         <div class="form-group">
                             <strong>Estado:</strong>

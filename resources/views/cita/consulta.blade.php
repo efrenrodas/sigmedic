@@ -222,31 +222,69 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-12">
-                <div class="row">
-                    <form class="form-inline">
-                        <label class="sr-only" for="inlineFormInputName2">Name</label>
-                        <input type="text" class="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="Jane Doe">
+            {{-- proximas citas --}}
+           <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-left">
+                        <span class="card-title">Proximas citas </span>
+                    </div>
 
-                        <label class="sr-only" for="inlineFormInputGroupUsername2">Username</label>
-                        <div class="input-group mb-2 mr-sm-2">
-                          <div class="input-group-prepend">
-                            <div class="input-group-text">@</div>
-                          </div>
-                          <input type="text" class="form-control" id="inlineFormInputGroupUsername2" placeholder="Username">
-                        </div>
 
-                        <div class="form-check mb-2 mr-sm-2">
-                          <input class="form-check-input" type="checkbox" id="inlineFormCheck">
-                          <label class="form-check-label" for="inlineFormCheck">
-                            Remember me
-                          </label>
-                        </div>
+                    <div class="float-right">
 
-                        <button type="submit" class="btn btn-primary mb-2">Submit</button>
-                      </form>
+
+                        <button onclick="traeCitas('{{$cita->id_medico}}')"  class="btn btn-info btn-sm"><i class="fa fa-plus"></i></button>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-hover">
+                            <thead class="thead">
+                                <tr>
+                                    <th>No</th>
+
+                                    <th>Fecha</th>
+                                    <th>Medico</th>
+
+                                    {{-- <th>Instrucciones</th> --}}
+                                    {{-- <th>Notas</th> --}}
+                                    {{-- <th>Id Cita</th> --}}
+
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($proximas as $proxima)
+                                    <tr>
+                                        <td>{{ $loop->iteration }}</td>
+
+                                        <td>{{ $proxima->horario }}</td>
+                                        <td>{{ $proxima->medico->name }}</td>
+
+                                        {{-- <td>{{ $receta->instrucciones }}</td> --}}
+                                        {{-- <td>{{ $receta->notas }}</td> --}}
+                                        {{-- <td>{{ $receta->id_cita }}</td> --}}
+
+                                        <td>
+                                            <form action="{{ route('recetas.destroy',$proxima->id) }}" method="POST">
+                                                {{-- <a class="btn btn-sm btn-primary " href="{{ route('recetas.show',$receta->id) }}"><i class="fa fa-fw fa-eye"></i> Show</a> --}}
+                                                {{-- <a class="btn btn-sm btn-success" href="{{ route('recetas.edit',$receta->id) }}"><i class="fa fa-fw fa-edit"></i> Edit</a> --}}
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+           </div>
+           {{-- fin proximas citas --}}
         </div>
 
         <div class="row">
@@ -491,6 +529,33 @@
               </div>
             </div>
           </div>
+          {{-- modal proxima cita --}}
+          <div class="modal fade" id="modalCitas" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Agendar cita</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <form method="POST" action="{{ route('cita.registrar') }}"  role="form" enctype="multipart/form-data">
+                    @csrf
+                    <div class="modal-body">
+                            <select name="cita" id="citas-select" class="form-control" aria-label="Default select example">
+
+                            </select>
+                    </div>
+                    <input type="hidden" name="id_paciente" value="{{$cita->paciente->id}}">
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    <button type="submmit" class="btn btn-primary">Crear</button>
+                    </div>
+                </form>
+            </div>
+            </div>
+        </div>
+        {{-- fin proxima cita  --}}
     @stop
 
     @section('css')
@@ -517,6 +582,50 @@
                     console.log(response);
                 }
             });
+        }
+        function traeCitas(id) {
+            let route="{{ route('cita.todas') }}";
+            $.ajax({
+                type:'GET',
+                url:route,
+                data:{
+                    'idMedico':id,
+                },
+                success:function(response){
+                 abrir('modalCitas');
+                 $('#citas-select').empty();
+                    llenaCitas(response.citas);
+                }
+            });
+        }
+        function llenaCitas(citas) {
+            // Suponiendo que 'response.citas' es un arreglo con las citas que quieres mostrar
+        //    let citas = response.citas;
+
+            // Obtén el elemento HTML donde quieres mostrar las citas
+            let citasSelect = $('#citas-select');
+
+            // Crea un elemento HTML para la opción "Selecciona una cita"
+            let optionDefault = $('<option>');
+            optionDefault.attr('value', '');
+            optionDefault.text('Selecciona una cita');
+
+            // Agrega la opción al select
+            citasSelect.append(optionDefault);
+
+            // Recorre el arreglo de citas y crea una opción para cada una
+            citas.forEach(function(cita) {
+            // Crea un elemento HTML para la opción
+            let option = $('<option>');
+
+            // Establece el valor y el texto de la opción para que muestre la información de la cita
+            option.attr('value', cita.id);
+            option.text(`Fecha: ${cita.horario}`);
+
+            // Agrega la opción al select
+            citasSelect.append(option);
+            });
+
         }
 
     </script>

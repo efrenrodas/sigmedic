@@ -92,7 +92,7 @@ class CitaController extends Controller
                 } else {
                     // La cita ya existe, hacer algo aquí (por ejemplo, mostrar un mensaje de error)
                 }
-            
+
         }
        // request()->validate(Cita::$rules);
 
@@ -264,7 +264,8 @@ class CitaController extends Controller
         $examenes=Examene::where('id_cita','=',$id)->get();
         $diagnosticos=Diagnostico::where('id_cita','=',$id)->where('tipo','=','definitivo')->get();
         $recetas=Receta::where('id_cita','=',$id)->get();
-        return view('cita.consulta', compact('cita','userenfermedades','sintomas','examenes','diagnosticos','recetas'));
+        $proximas=Cita::where('id_paciente','=',$cita->paciente->id)->where('estado','=','1')->where('horario', '>', date('Y-m-d H:i:s'))->get();
+        return view('cita.consulta', compact('cita','userenfermedades','sintomas','examenes','diagnosticos','recetas','proximas'));
 
        #return response()->json($id);
     }
@@ -280,6 +281,22 @@ class CitaController extends Controller
         $cita->estado='4';
         $cita->save();
         return redirect()->route('medico.citas');
+    }
+    public function registrar(Request $request)
+    {
+      //  return response()->json($request);
+      $id=$request['cita'];
+      $cita=Cita::find($id);
+      $cita->id_paciente=$request['id_paciente'];
+      $cita->estado='1';
+      $cita->save();
+      return redirect()->back();
+    }
+    public function todasCitas(Request $request)
+    {
+       $idMedico=$request['idMedico'];
+       $citas = Cita::where('horario', '>', date('Y-m-d H:i:s'))->where('estado','=','0')->get();
+       return response()->json(['citas'=>$citas]);
     }
 
 }
