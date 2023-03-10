@@ -237,7 +237,7 @@ class CitaController extends Controller
     public function CitasMedico()
     {
         $idMedico=Auth()->id();
-        $citas= Cita::where('id_medico','=',$idMedico)->where('estado','!=','0')->paginate();
+        $citas= Cita::where('id_medico','=',$idMedico)->where('estado','!=','0')->orderBy('horario','desc')->paginate();
        # return response()->json($citas);
         return view('cita.medico', compact('citas'))
             ->with('i', (request()->input('page', 1) - 1) * $citas->perPage());
